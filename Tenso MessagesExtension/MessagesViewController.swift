@@ -30,6 +30,8 @@ class MessagesViewController: MSMessagesAppViewController {
                     
                 break
                 case .denied,.notDetermined,.restricted:
+                    
+                    //TODO show grant access button
                     print("no photo access")
             }
             

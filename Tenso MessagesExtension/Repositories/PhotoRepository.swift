@@ -1,5 +1,6 @@
 
 import Foundation
+import UIKit
 import Photos
 
 class PhotoRepository {
@@ -9,7 +10,7 @@ class PhotoRepository {
     fileprivate var imageManager: PHImageManager
     fileprivate var requestOptions: PHImageRequestOptions
     fileprivate var fetchOptions: PHFetchOptions
-    fileprivate var fetchResult: PHFetchResult<PHAsset>
+    fileprivate var fetchResult: PHFetchResult<PHAsset>?
     
     init () {
         imageManager = PHImageManager.default()
@@ -17,36 +18,40 @@ class PhotoRepository {
         requestOptions.isSynchronous = true
         fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key:"creationDate", ascending: true)]
-        fetchResult = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: fetchOptions)
+       // fetchResult =
     }
     
     var count: Int {
-        return fetchResult.count
+        return fetchResult?.count ?? 0
     }
     
-    func fetchAll() -> [UIImage] {
-        
-        var resultArray = [UIImage]()
-        for index in 0..<fetchResult.count {
-            imageManager.requestImage(for: fetchResult.object(at: index) as PHAsset, targetSize: UIScreen.main.bounds.size, contentMode: PHImageContentMode.aspectFill, options: requestOptions) { (image, _) in
-                
-                if let image = image {
-                    resultArray.append(image)
-                }
-            }
-        }
-        return resultArray
+    func asset(at index : Int) -> PHAsset? {
+        return fetchResult?.object(at: index)
     }
     
-    func setPhoto(at index: Int, completion block: @escaping (UIImage?)->()) {
+    func fetchAll() -> PHFetchResult<PHAsset> {
         
-        if index < fetchResult.count  {
+        fetchResult = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: fetchOptions)
+        
+        return fetchResult!
+        
+//        var resultArray = [UIImage]()
+//        for index in 0..<fetchResult.count {
+//            imageManager.requestImage(for: fetchResult.object(at: index) as PHAsset, targetSize: UIScreen.main.bounds.size, contentMode: PHImageContentMode.aspectFill, options: requestOptions) { (image, _) in
+//
+//                if let image = image {
+//                    resultArray.append(image)
+//                }
+//            }
+//        }
+//        return resultArray
+       
+    }
+    
+    func fetchPhoto(for asset: PHAsset, completion block: @escaping (UIImage?)->()) {
             
-            imageManager.requestImage(for: fetchResult.object(at: index) as PHAsset, targetSize: UIScreen.main.bounds.size, contentMode: PHImageContentMode.aspectFill, options: requestOptions) { (image, _) in
-                block(image)
-            }
-        } else {
-            block(nil)
+        imageManager.requestImage(for: asset, targetSize: UIScreen.main.bounds.size, contentMode: PHImageContentMode.aspectFill, options: requestOptions) { (image, _) in
+            block(image)
         }
     }
     

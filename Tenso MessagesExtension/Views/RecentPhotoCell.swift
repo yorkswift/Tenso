@@ -7,15 +7,15 @@ class RecentPhotoCell : UICollectionViewCell {
     
     var representedAssetIdentifier: String!
     
-//    var thumbnail: UIImage! {
-//        didSet {
-//            photo.image = thumbnail
-//        }
-//    }
+    var thumbnail: UIImage! {
+        didSet {
+            photo.image = thumbnail
+        }
+    }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        //photo.image = nil
+        photo.image = nil
     
     }
     

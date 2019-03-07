@@ -1,9 +1,11 @@
 import Foundation
 import UIKit
+import Photos
 
-class RecentPhotosViewController : UICollectionViewController {
+class RecentPhotosViewController : UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var repository : PhotoRepository?
+    var photos: PHFetchResult<PHAsset>!
     
     override func viewDidLoad() {
         
@@ -23,7 +25,9 @@ class RecentPhotosViewController : UICollectionViewController {
     
     func reload(){
         
-        repository?.fetchAll()
+        photos = repository?.fetchAll()
+        
+        self.collectionView?.reloadData()
         
     }
     
@@ -36,26 +40,21 @@ class RecentPhotosViewController : UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-//        let asset = fetchResult.object(at: indexPath.item)
-//
-//        // Dequeue a GridViewCell.
+        guard let asset = repository?.asset(at: indexPath.item) else {
+            fatalError("no item at path \(indexPath.item)")
+        }
+
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: RecentPhotoCell.self), for: indexPath) as? RecentPhotoCell
             else { fatalError("unexpected cell in collection view") }
-//
-//        // Add a badge to the cell if the PHAsset represents a Live Photo.
-//        if asset.mediaSubtypes.contains(.photoLive) {
-//            cell.livePhotoBadgeImage = PHLivePhotoView.livePhotoBadgeImage(options: .overContent)
-//        }
-//
-//        // Request an image for the asset from the PHCachingImageManager.
-//        cell.representedAssetIdentifier = asset.localIdentifier
-//        imageManager.requestImage(for: asset, targetSize: thumbnailSize, contentMode: .aspectFill, options: nil, resultHandler: { image, _ in
-//            // The cell may have been recycled by the time this handler gets called;
-//            // set the cell's thumbnail image only if it's still showing the same asset.
-//            if cell.representedAssetIdentifier == asset.localIdentifier {
-//                cell.thumbnailImage = image
-//            }
-//        })
+
+        cell.representedAssetIdentifier = asset.localIdentifier
+        
+        repository?.fetchPhoto(for: asset, completion: { image in
+
+            if cell.representedAssetIdentifier == asset.localIdentifier {
+                cell.thumbnail = image
+            }
+        })
         
         return cell
         
