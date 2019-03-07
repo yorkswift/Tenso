@@ -1,19 +1,43 @@
-//
-//  MessagesViewController.swift
-//  Tenso MessagesExtension
-//
-//  Created by Saoirse on 06/03/2019.
-//  Copyright © 2019 yorkSwift. All rights reserved.
-//
 
 import UIKit
 import Messages
 
 class MessagesViewController: MSMessagesAppViewController {
     
+    private var recentPhotos: RecentPhotosViewController?
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        let photos = PhotoRepository.shared
+            
+        photos.checkAuthorisation(onComplete: {
+            
+            status in
+            
+            switch(status){
+                case .authorized:
+                    
+                    guard let recentPhotos = self.children.first as? RecentPhotosViewController else {
+                        fatalError("Check storyboard for missing recentViewController")
+                    }
+                    
+                    self.recentPhotos = recentPhotos
+                    
+                    self.recentPhotos?.reload()
+                 
+                    
+                break
+                case .denied,.notDetermined,.restricted:
+                    print("no photo access")
+            }
+            
+            
+        })
+        
+       
+        
     }
     
     // MARK: - Conversation Handling

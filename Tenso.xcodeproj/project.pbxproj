@@ -13,6 +13,9 @@
 		1A03A53F2230852B0076647C /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A03A53E2230852B0076647C /* MessagesViewController.swift */; };
 		1A03A5422230852B0076647C /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A03A5402230852B0076647C /* MainInterface.storyboard */; };
 		1A03A5442230852C0076647C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A03A5432230852C0076647C /* Assets.xcassets */; };
+		1A03A55022308AC90076647C /* PhotoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A03A54F22308AC90076647C /* PhotoRepository.swift */; };
+		1A03A553223090A90076647C /* RecentPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A03A552223090A90076647C /* RecentPhotosViewController.swift */; };
+		1A03A5552230938F0076647C /* RecentPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A03A5542230938F0076647C /* RecentPhotoCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		1A03A5412230852B0076647C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		1A03A5432230852C0076647C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A03A5452230852C0076647C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1A03A54F22308AC90076647C /* PhotoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRepository.swift; sourceTree = "<group>"; };
+		1A03A552223090A90076647C /* RecentPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentPhotosViewController.swift; sourceTree = "<group>"; };
+		1A03A5542230938F0076647C /* RecentPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentPhotoCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,12 +108,31 @@
 		1A03A53D2230852B0076647C /* Tenso MessagesExtension */ = {
 			isa = PBXGroup;
 			children = (
+				1A03A556223095740076647C /* Repositories */,
+				1A03A551223090850076647C /* Views */,
 				1A03A53E2230852B0076647C /* MessagesViewController.swift */,
 				1A03A5402230852B0076647C /* MainInterface.storyboard */,
 				1A03A5432230852C0076647C /* Assets.xcassets */,
 				1A03A5452230852C0076647C /* Info.plist */,
 			);
 			path = "Tenso MessagesExtension";
+			sourceTree = "<group>";
+		};
+		1A03A551223090850076647C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1A03A552223090A90076647C /* RecentPhotosViewController.swift */,
+				1A03A5542230938F0076647C /* RecentPhotoCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		1A03A556223095740076647C /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				1A03A54F22308AC90076647C /* PhotoRepository.swift */,
+			);
+			path = Repositories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,6 +234,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A03A55022308AC90076647C /* PhotoRepository.swift in Sources */,
+				1A03A5552230938F0076647C /* RecentPhotoCell.swift in Sources */,
+				1A03A553223090A90076647C /* RecentPhotosViewController.swift in Sources */,
 				1A03A53F2230852B0076647C /* MessagesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
