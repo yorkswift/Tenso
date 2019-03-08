@@ -6,12 +6,17 @@ class RecentPhotosViewController : UICollectionViewController, UICollectionViewD
     
     var repository : PhotoRepository?
     var photos: PHFetchResult<PHAsset>!
+    fileprivate var thumbnailSize: CGSize!
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         repository = PhotoRepository.shared
+        
+        let scale = UIScreen.main.scale
+        let cellSize = (collectionViewLayout as! UICollectionViewFlowLayout).itemSize
+        thumbnailSize = CGSize(width: cellSize.width * scale, height: cellSize.height * scale)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,7 +54,7 @@ class RecentPhotosViewController : UICollectionViewController, UICollectionViewD
 
         cell.representedAssetIdentifier = asset.localIdentifier
         
-        repository?.fetchPhoto(for: asset, completion: { image in
+        repository?.fetchPhoto(for: asset, at: thumbnailSize, completion: { image in
 
             if cell.representedAssetIdentifier == asset.localIdentifier {
                 cell.thumbnail = image
@@ -58,6 +63,29 @@ class RecentPhotosViewController : UICollectionViewController, UICollectionViewD
         
         return cell
         
+    }
+    
+    // MARK: UICollectionViewDelegateFlowLayout
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets.zero
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let cellWidth = collectionView.bounds.width/3.0
+        let cellHeight = cellWidth
+        
+        return CGSize(width: cellWidth, height: cellHeight)
+
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.0
     }
     
     

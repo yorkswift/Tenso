@@ -17,7 +17,7 @@ class PhotoRepository {
         requestOptions = PHImageRequestOptions()
         requestOptions.isSynchronous = true
         fetchOptions = PHFetchOptions()
-        fetchOptions.sortDescriptors = [NSSortDescriptor(key:"creationDate", ascending: true)]
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key:"creationDate", ascending: false)]
        // fetchResult =
     }
     
@@ -48,9 +48,9 @@ class PhotoRepository {
        
     }
     
-    func fetchPhoto(for asset: PHAsset, completion block: @escaping (UIImage?)->()) {
+    func fetchPhoto(for asset: PHAsset, at size: CGSize, completion block: @escaping (UIImage?)->()) {
             
-        imageManager.requestImage(for: asset, targetSize: UIScreen.main.bounds.size, contentMode: PHImageContentMode.aspectFill, options: requestOptions) { (image, _) in
+        imageManager.requestImage(for: asset, targetSize: size, contentMode: .aspectFit, options: requestOptions) { (image, _) in
             block(image)
         }
     }

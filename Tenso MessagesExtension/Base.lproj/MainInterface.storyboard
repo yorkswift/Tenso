@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eAe-oc-qCe">
-                                <rect key="frame" x="0.0" y="10" width="320" height="528"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="518"/>
                                 <connections>
                                     <segue destination="klY-F0-Cye" kind="embed" id="nxM-5K-u0U"/>
                                 </connections>
@@ -27,10 +27,10 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="eAe-oc-qCe" firstAttribute="width" secondItem="zMn-AG-sqS" secondAttribute="width" id="3YM-hk-eoy"/>
-                            <constraint firstItem="eAe-oc-qCe" firstAttribute="centerY" secondItem="LDy-ih-0nr" secondAttribute="centerY" id="PUA-aV-xl5"/>
-                            <constraint firstItem="eAe-oc-qCe" firstAttribute="centerX" secondItem="LDy-ih-0nr" secondAttribute="centerX" id="g3s-pb-3RH"/>
-                            <constraint firstItem="eAe-oc-qCe" firstAttribute="height" secondItem="zMn-AG-sqS" secondAttribute="height" id="kc8-BU-Cws"/>
+                            <constraint firstItem="eAe-oc-qCe" firstAttribute="top" secondItem="LDy-ih-0nr" secondAttribute="top" id="1nC-bh-EWY"/>
+                            <constraint firstItem="eAe-oc-qCe" firstAttribute="leading" secondItem="LDy-ih-0nr" secondAttribute="leading" id="52A-4l-fPZ"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="eAe-oc-qCe" secondAttribute="bottom" constant="-10" id="ecg-0J-Kvq"/>
+                            <constraint firstAttribute="trailing" secondItem="eAe-oc-qCe" secondAttribute="trailing" id="iul-rp-Ghr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LDy-ih-0nr"/>
                     </view>
@@ -46,10 +46,10 @@
             <objects>
                 <collectionViewController id="klY-F0-Cye" customClass="RecentPhotosViewController" customModule="Tenso_MessagesExtension" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="5bK-Ac-5Lj">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="528"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MLa-qK-Dqp">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="MLa-qK-Dqp">
                             <size key="itemSize" width="80" height="80"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -69,10 +69,10 @@
                                     </subviews>
                                 </view>
                                 <constraints>
-                                    <constraint firstItem="Hj1-rK-CDg" firstAttribute="leading" secondItem="jE8-6j-cjl" secondAttribute="leading" id="7TY-1a-k7E"/>
-                                    <constraint firstAttribute="bottom" secondItem="Hj1-rK-CDg" secondAttribute="bottom" id="Ehb-ed-O65"/>
-                                    <constraint firstItem="Hj1-rK-CDg" firstAttribute="top" secondItem="jE8-6j-cjl" secondAttribute="top" id="dEZ-ct-ICz"/>
-                                    <constraint firstAttribute="trailing" secondItem="Hj1-rK-CDg" secondAttribute="trailing" id="eun-ie-oo1"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="Hj1-rK-CDg" secondAttribute="trailing" constant="-8" id="4gz-al-pF7"/>
+                                    <constraint firstItem="Hj1-rK-CDg" firstAttribute="top" secondItem="jE8-6j-cjl" secondAttribute="top" id="Pjo-0E-9kn"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="Hj1-rK-CDg" secondAttribute="bottom" constant="-8" id="Yob-Uh-IRm"/>
+                                    <constraint firstItem="Hj1-rK-CDg" firstAttribute="leading" secondItem="jE8-6j-cjl" secondAttribute="leading" id="b0m-aS-F8K"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="photo" destination="Hj1-rK-CDg" id="yce-dB-LtN"/>
