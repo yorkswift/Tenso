@@ -8,6 +8,8 @@ class RecentPhotosViewController : UICollectionViewController, UICollectionViewD
     var photos: PHFetchResult<PHAsset>!
     fileprivate var thumbnailSize: CGSize!
     
+    weak var delegate: RecentPhotoViewControllerDelegate?
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -65,6 +67,32 @@ class RecentPhotosViewController : UICollectionViewController, UICollectionViewD
         
     }
     
+    // MARK :  Segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        print("prepare for segue")
+        
+        guard let destination = segue.destination as? TensoModeViewController
+            else { fatalError("unexpected view controller for segue") }
+        
+        let indexPath = collectionView!.indexPath(for: sender as! UICollectionViewCell)!
+        destination.selectedPhotoIndex = indexPath.item
+        
+        delegate?.recentPhotosDidSelectPhoto(self)
+        
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard let cell = collectionView.cellForItem(at: indexPath) as? RecentPhotoCell else { return }
+        
+       
+        
+        self.performSegue(withIdentifier: "ShowTensoModeController", sender: cell)
+        
+    }
+    
+    
     // MARK: UICollectionViewDelegateFlowLayout
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -89,4 +117,10 @@ class RecentPhotosViewController : UICollectionViewController, UICollectionViewD
     }
     
     
+}
+
+
+protocol RecentPhotoViewControllerDelegate: class {
+    
+    func recentPhotosDidSelectPhoto(_ controller: RecentPhotosViewController)
 }

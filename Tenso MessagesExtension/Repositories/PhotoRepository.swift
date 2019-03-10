@@ -34,17 +34,6 @@ class PhotoRepository {
         fetchResult = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: fetchOptions)
         
         return fetchResult!
-        
-//        var resultArray = [UIImage]()
-//        for index in 0..<fetchResult.count {
-//            imageManager.requestImage(for: fetchResult.object(at: index) as PHAsset, targetSize: UIScreen.main.bounds.size, contentMode: PHImageContentMode.aspectFill, options: requestOptions) { (image, _) in
-//
-//                if let image = image {
-//                    resultArray.append(image)
-//                }
-//            }
-//        }
-//        return resultArray
        
     }
     

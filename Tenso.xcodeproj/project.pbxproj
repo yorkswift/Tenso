@@ -16,6 +16,7 @@
 		1A03A55022308AC90076647C /* PhotoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A03A54F22308AC90076647C /* PhotoRepository.swift */; };
 		1A03A553223090A90076647C /* RecentPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A03A552223090A90076647C /* RecentPhotosViewController.swift */; };
 		1A03A5552230938F0076647C /* RecentPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A03A5542230938F0076647C /* RecentPhotoCell.swift */; };
+		1A3ED7B522343B0400632412 /* TensoModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3ED7B422343B0400632412 /* TensoModeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		1A03A54F22308AC90076647C /* PhotoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRepository.swift; sourceTree = "<group>"; };
 		1A03A552223090A90076647C /* RecentPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentPhotosViewController.swift; sourceTree = "<group>"; };
 		1A03A5542230938F0076647C /* RecentPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentPhotoCell.swift; sourceTree = "<group>"; };
+		1A3ED7B422343B0400632412 /* TensoModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TensoModeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,7 +112,6 @@
 			children = (
 				1A03A556223095740076647C /* Repositories */,
 				1A03A551223090850076647C /* Views */,
-				1A03A53E2230852B0076647C /* MessagesViewController.swift */,
 				1A03A5402230852B0076647C /* MainInterface.storyboard */,
 				1A03A5432230852C0076647C /* Assets.xcassets */,
 				1A03A5452230852C0076647C /* Info.plist */,
@@ -121,8 +122,10 @@
 		1A03A551223090850076647C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1A03A53E2230852B0076647C /* MessagesViewController.swift */,
 				1A03A552223090A90076647C /* RecentPhotosViewController.swift */,
 				1A03A5542230938F0076647C /* RecentPhotoCell.swift */,
+				1A3ED7B422343B0400632412 /* TensoModeViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A3ED7B522343B0400632412 /* TensoModeViewController.swift in Sources */,
 				1A03A55022308AC90076647C /* PhotoRepository.swift in Sources */,
 				1A03A5552230938F0076647C /* RecentPhotoCell.swift in Sources */,
 				1A03A553223090A90076647C /* RecentPhotosViewController.swift in Sources */,

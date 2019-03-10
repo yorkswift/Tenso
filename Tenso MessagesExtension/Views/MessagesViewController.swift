@@ -24,9 +24,10 @@ class MessagesViewController: MSMessagesAppViewController {
                     }
                     
                     self.recentPhotos = recentPhotos
+                    self.recentPhotos?.delegate = self
                     
                     self.recentPhotos?.reload()
-                 
+                    
                     
                 break
                 case .denied,.notDetermined,.restricted:
@@ -38,7 +39,6 @@ class MessagesViewController: MSMessagesAppViewController {
             
         })
         
-       
         
     }
     
@@ -90,4 +90,14 @@ class MessagesViewController: MSMessagesAppViewController {
         // Use this method to finalize any behaviors associated with the change in presentation style.
     }
 
+}
+
+extension MessagesViewController : RecentPhotoViewControllerDelegate {
+    
+    func recentPhotosDidSelectPhoto(_ controller: RecentPhotosViewController) {
+        
+        print("recentPhotosDidSelectPhoto")
+        requestPresentationStyle(.expanded)
+    }
+    
 }
