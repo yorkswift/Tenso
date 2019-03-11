@@ -10,6 +10,11 @@ class RecentPhotosViewController : UICollectionViewController, UICollectionViewD
     
     weak var delegate: RecentPhotoViewControllerDelegate?
     
+    enum Segues : String {
+        case ShowTensoModeController
+        case HideTensoModeController
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -70,8 +75,6 @@ class RecentPhotosViewController : UICollectionViewController, UICollectionViewD
     // MARK :  Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        print("prepare for segue")
-        
         guard let destination = segue.destination as? TensoModeViewController
             else { fatalError("unexpected view controller for segue") }
         
@@ -88,10 +91,16 @@ class RecentPhotosViewController : UICollectionViewController, UICollectionViewD
         
        
         
-        self.performSegue(withIdentifier: "ShowTensoModeController", sender: cell)
+        self.performSegue(withIdentifier: String(describing:Segues.ShowTensoModeController), sender: cell)
         
     }
     
+//    func hideTensoModeController(){
+//        
+//        self.performSegue(withIdentifier: String(describing:Segues.HideTensoModeController), sender: nil)
+//        
+//    }
+//    
     
     // MARK: UICollectionViewDelegateFlowLayout
     

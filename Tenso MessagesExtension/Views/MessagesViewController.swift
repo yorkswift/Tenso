@@ -79,15 +79,40 @@ class MessagesViewController: MSMessagesAppViewController {
     }
     
     override func willTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
-        // Called before the extension transitions to a new presentation style.
-    
-        // Use this method to prepare for the change in presentation style.
+        
+        if(presentationStyle == .compact){
+              print("compact")
+        }
+        
+//        switch(presentationStyle){
+//        case .compact:
+//
+//            print("compact")
+//            // revert to recent photos?
+//           // recentPhotos?.hideTensoModeController()
+//
+//        break
+//
+//        case .expanded:
+//
+//            //
+//
+//        break
+//            case .transcript:
+//            break
+//        }
     }
     
     override func didTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
-        // Called after the extension transitions to a new presentation style.
-    
-        // Use this method to finalize any behaviors associated with the change in presentation style.
+//
+//        switch(presentationStyle){
+//        case .compact:
+//                break
+//        case .expanded:
+//                 break
+//        case .transcript:
+//            break
+//        }
     }
 
 }
