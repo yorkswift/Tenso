@@ -19,6 +19,8 @@ if let inputImage = UIImage(named: "IMG_0548.JPG") {
         if let cutImageRef: CGImage = inputImage.cgImage?.cropping(to:face.bounds) {
         
                 let croppedImage: UIImage = UIImage(cgImage: cutImageRef)
+            
+             print(croppedImage)
         
          }
         
@@ -42,6 +44,7 @@ if let inputImage = UIImage(named: "IMG_0548.JPG") {
             if let eyeImageRef: CGImage = inputImage.cgImage?.cropping(to:eyeRect) {
                 
                 let eyesImage: UIImage = UIImage(cgImage: eyeImageRef)
+                 print(eyesImage)
                 
             }
         }

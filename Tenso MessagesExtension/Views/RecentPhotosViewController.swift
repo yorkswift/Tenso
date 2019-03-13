@@ -4,7 +4,6 @@ import Photos
 
 class RecentPhotosViewController : UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    var repository : PhotoRepository?
     var photos: PHFetchResult<PHAsset>!
     fileprivate var thumbnailSize: CGSize!
     
@@ -18,8 +17,6 @@ class RecentPhotosViewController : UICollectionViewController, UICollectionViewD
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-        repository = PhotoRepository.shared
         
         let scale = UIScreen.main.scale
         let cellSize = (collectionViewLayout as! UICollectionViewFlowLayout).itemSize
@@ -37,7 +34,7 @@ class RecentPhotosViewController : UICollectionViewController, UICollectionViewD
     
     func reload(){
         
-        photos = repository?.fetchAll()
+        photos = PhotoRepository.shared.fetchAll()
         
         self.collectionView?.reloadData()
         
@@ -46,13 +43,12 @@ class RecentPhotosViewController : UICollectionViewController, UICollectionViewD
     // MARK: UICollectionView
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return repository?.count ?? 0
+        return PhotoRepository.shared.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let asset = repository?.asset(at: indexPath.item) else {
+        guard let asset = PhotoRepository.shared.asset(at: indexPath.item) else {
             fatalError("no item at path \(indexPath.item)")
         }
 
@@ -61,7 +57,7 @@ class RecentPhotosViewController : UICollectionViewController, UICollectionViewD
 
         cell.representedAssetIdentifier = asset.localIdentifier
         
-        repository?.fetchPhoto(for: asset, at: thumbnailSize, completion: { image in
+        PhotoRepository.shared.fetchPhoto(for: asset, at: thumbnailSize, completion: { image in
 
             if cell.representedAssetIdentifier == asset.localIdentifier {
                 cell.thumbnail = image

@@ -20,6 +20,7 @@
 		1A3ED7B72235A69400632412 /* TensoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3ED7B62235A69400632412 /* TensoRepository.swift */; };
 		1A3ED7BA2235C93E00632412 /* AutoModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3ED7B92235C93E00632412 /* AutoModeViewController.swift */; };
 		1A3ED7BC2235C94E00632412 /* FacesModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3ED7BB2235C94E00632412 /* FacesModeViewController.swift */; };
+		1A9B8E352236EDF10099B159 /* TensoStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B8E342236EDF10099B159 /* TensoStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		1A3ED7B62235A69400632412 /* TensoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TensoRepository.swift; sourceTree = "<group>"; };
 		1A3ED7B92235C93E00632412 /* AutoModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoModeViewController.swift; sourceTree = "<group>"; };
 		1A3ED7BB2235C94E00632412 /* FacesModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacesModeViewController.swift; sourceTree = "<group>"; };
+		1A9B8E342236EDF10099B159 /* TensoStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TensoStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 		1A03A53D2230852B0076647C /* Tenso MessagesExtension */ = {
 			isa = PBXGroup;
 			children = (
+				1A9B8E332236EDE00099B159 /* Models */,
 				1A03A556223095740076647C /* Repositories */,
 				1A03A551223090850076647C /* Views */,
 				1A03A5402230852B0076647C /* MainInterface.storyboard */,
@@ -132,7 +135,6 @@
 				1A03A53E2230852B0076647C /* MessagesViewController.swift */,
 				1A03A552223090A90076647C /* RecentPhotosViewController.swift */,
 				1A03A5542230938F0076647C /* RecentPhotoCell.swift */,
-				1A3ED7B422343B0400632412 /* TensoModeViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -149,10 +151,19 @@
 		1A3ED7B82235C92500632412 /* TensoModeViews */ = {
 			isa = PBXGroup;
 			children = (
+				1A3ED7B422343B0400632412 /* TensoModeViewController.swift */,
 				1A3ED7B92235C93E00632412 /* AutoModeViewController.swift */,
 				1A3ED7BB2235C94E00632412 /* FacesModeViewController.swift */,
 			);
 			path = TensoModeViews;
+			sourceTree = "<group>";
+		};
+		1A9B8E332236EDE00099B159 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1A9B8E342236EDF10099B159 /* TensoStack.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,6 +272,7 @@
 				1A3ED7B72235A69400632412 /* TensoRepository.swift in Sources */,
 				1A03A553223090A90076647C /* RecentPhotosViewController.swift in Sources */,
 				1A3ED7BC2235C94E00632412 /* FacesModeViewController.swift in Sources */,
+				1A9B8E352236EDF10099B159 /* TensoStack.swift in Sources */,
 				1A03A53F2230852B0076647C /* MessagesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

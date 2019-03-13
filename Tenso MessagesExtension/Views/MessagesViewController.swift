@@ -9,10 +9,8 @@ class MessagesViewController: MSMessagesAppViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-        let photos = PhotoRepository.shared
             
-        photos.checkAuthorisation(onComplete: {
+         PhotoRepository.shared.checkAuthorisation(onComplete: {
             
             status in
             
@@ -120,8 +118,6 @@ class MessagesViewController: MSMessagesAppViewController {
 extension MessagesViewController : RecentPhotoViewControllerDelegate {
     
     func recentPhotosDidSelectPhoto(_ controller: RecentPhotosViewController) {
-        
-        print("recentPhotosDidSelectPhoto")
         requestPresentationStyle(.expanded)
     }
     

@@ -56,14 +56,14 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="RecentPhotoCell" id="jE8-6j-cjl" customClass="RecentPhotoCell" customModule="Tenso_MessagesExtension" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RecentPhotoCell" id="jE8-6j-cjl" customClass="RecentPhotoCell" customModule="Tenso_MessagesExtension" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                     <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hj1-rK-CDg">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hj1-rK-CDg">
                                             <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                         </imageView>
                                     </subviews>
@@ -156,6 +156,9 @@
                         <viewLayoutGuide key="safeArea" id="09C-tB-3aU"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="AUTO" image="AutoNormal" id="n7S-fd-ZU9"/>
+                    <connections>
+                        <outlet property="TensoStackView" destination="PcU-Kf-5U0" id="ZCW-0G-SFj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t3Q-Va-0W1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -187,6 +190,7 @@
         <image name="FacesNormal" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="w2d-EB-VBU"/>
         <segue reference="xzs-gN-zff"/>
     </inferredMetricsTieBreakers>
 </document>

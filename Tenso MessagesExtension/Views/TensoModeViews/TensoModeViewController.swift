@@ -2,12 +2,12 @@
 import Foundation
 import UIKit
 
+enum TensoMode : String {
+    case Auto
+    case Faces
+}
+
 class TensoModeViewController : UITabBarController {
-    
-    enum TensoMode : String {
-      case Auto
-      case Faces
-    }
     
     var selectedPhotoIndex: Int?
     var tensoRepository : TensoRepository?
@@ -21,24 +21,36 @@ class TensoModeViewController : UITabBarController {
         
         initTabBarItems()
         
-        print("hello \(selectedPhotoIndex!)")
-        
     }
     
-    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+    func renderTenso(for mode: TensoMode, on complete : @escaping (_ stack : TensoStack) -> Void) {
         
-        guard let title = item.title else { return }
+        guard let photoIndex = selectedPhotoIndex else {
+            
+             print("no index")
+            return
+        }
         
-        if let mode = TensoMode(rawValue: title) {
-            switch(mode){
-            case .Auto:
+        guard let asset = PhotoRepository.shared.asset(at: photoIndex) else {
+               print("no asset")
+            return
+        }
+        
+        switch(mode){
+        case .Auto:
+            
+            let tenso = TensoStack(for: asset)
+            
+            TensoRepository.shared.renderTenso(for: tenso, on: { newStack in
                 
-             
+                complete(newStack)
                 
-                break
-            case .Faces:
-                break
-            }
+            })
+            
+            
+            break
+        case .Faces:
+            break
         }
         
     }
@@ -53,8 +65,6 @@ class TensoModeViewController : UITabBarController {
                 let imageNameForSelectedState  = arrayOfImageNameForSelectedState[i]
                 let imageNameForUnselectedState = arrayOfImageNameForUnselectedState[i]
                 
-                print(imageNameForSelectedState)
-                
                 self.tabBar.items?[i].selectedImage = UIImage(named: imageNameForSelectedState)?.withRenderingMode(.alwaysOriginal)
                 self.tabBar.items?[i].image = UIImage(named: imageNameForUnselectedState)?.withRenderingMode(.alwaysOriginal)
             }
@@ -63,3 +73,4 @@ class TensoModeViewController : UITabBarController {
     }
     
 }
+

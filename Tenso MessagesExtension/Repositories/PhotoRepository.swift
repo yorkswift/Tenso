@@ -18,7 +18,6 @@ class PhotoRepository {
         requestOptions.isSynchronous = true
         fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key:"creationDate", ascending: false)]
-       // fetchResult =
     }
     
     var count: Int {
@@ -42,6 +41,7 @@ class PhotoRepository {
         imageManager.requestImage(for: asset, targetSize: size, contentMode: .aspectFit, options: requestOptions) { (image, _) in
             block(image)
         }
+       
     }
     
     public func checkAuthorisation(onComplete handleCompletion: @escaping (PHAuthorizationStatus)->()) {
