@@ -11,8 +11,6 @@ class AutoModeViewController: UIViewController {
         
         if let modeController = self.tabBarController as? TensoModeViewController {
             
-            print("renderTenso")
-            
             modeController.renderTenso(for: .Auto) { stack in
                 
                 var v = 0
@@ -20,8 +18,6 @@ class AutoModeViewController: UIViewController {
                 for subView in self.TensoStackView.subviews {
                 
                     if let imageView = subView as? UIImageView {
-                        
-                       // if(imageView.image != nil){ continue }
                         
                         if(stack.stack.indices.contains(v)){
                         

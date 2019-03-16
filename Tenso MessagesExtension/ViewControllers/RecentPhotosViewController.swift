@@ -121,11 +121,4 @@ class RecentPhotosViewController : UICollectionViewController, UICollectionViewD
         return 0.0
     }
     
-    
-}
-
-
-protocol RecentPhotoViewControllerDelegate: class {
-    
-    func recentPhotosDidSelectPhoto(_ controller: RecentPhotosViewController)
 }

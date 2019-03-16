@@ -82,27 +82,10 @@ class MessagesViewController: MSMessagesAppViewController {
               print("compact")
         }
         
-//        switch(presentationStyle){
-//        case .compact:
-//
-//            print("compact")
-//            // revert to recent photos?
-//           // recentPhotos?.hideTensoModeController()
-//
-//        break
-//
-//        case .expanded:
-//
-//            //
-//
-//        break
-//            case .transcript:
-//            break
-//        }
     }
     
     override func didTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
-//
+
 //        switch(presentationStyle){
 //        case .compact:
 //                break

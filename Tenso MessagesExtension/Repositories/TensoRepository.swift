@@ -23,29 +23,44 @@ class TensoRepository  {
             if let x1 = image {
                 
                 newStack.stack.append(x1)
-               
+                
+                DispatchQueue.main.sync {
+                    complete(newStack)
+                }
+                
                 //x2
-                let x2Crop = CGRect(x: 0,
+                var x2Crop : CGRect
+                
+                if let firstFace = FeatureRepository.shared.detectFaces(in: x1)?.first {
+                    
+                    x2Crop = firstFace
+                    
+                    let halfway = CGRect(
+                        x: firstFace.minX / 2 ,
+                        y: firstFace.minY / 2 ,
+                        width: (x1.size.width + firstFace.width) / 2 ,
+                        height: (x1.size.height + firstFace.height) / 2)
+                    
+                    
+                    if let cutImageRef: CGImage = x1.cgImage?.cropping(to:halfway) {
+                        
+                        let x2: UIImage = UIImage(cgImage: cutImageRef)
+                        
+                        newStack.stack.append(x2)
+                        
+                    }
+                    
+                } else {
+               
+                    x2Crop = CGRect(x: 0,
                                   y: 0,
                                   width: 200,
                                   height: 200)
-                
-                if let cutImageRef: CGImage = x1.cgImage?.cropping(to:x2Crop) {
-                    
-                    let x2: UIImage = UIImage(cgImage: cutImageRef)
-                    
-                    newStack.stack.append(x2)
                     
                 }
                 
                 //x3
-                let x3Crop = CGRect(x: 0,
-                                  y: 0,
-                                  width: 100,
-                                  height: 100)
-                
-
-                if let cutImageRef: CGImage = x1.cgImage?.cropping(to:x3Crop) {
+                if let cutImageRef: CGImage = x1.cgImage?.cropping(to:x2Crop) {
                     
                     let x3: UIImage = UIImage(cgImage: cutImageRef)
                     
