@@ -4,7 +4,7 @@ import Messages
 
 class MessagesViewController: MSMessagesAppViewController {
     
-    private var recentPhotos: RecentPhotosViewController?
+    weak private var recentPhotos: RecentPhotosViewController?
     
     override func viewDidLoad() {
         
@@ -17,7 +17,11 @@ class MessagesViewController: MSMessagesAppViewController {
             switch(status){
                 case .authorized:
                     
-                    guard let recentPhotos = self.children.first as? RecentPhotosViewController else {
+                    guard let nav = self.children.first as? UINavigationController else {
+                        fatalError("Check storyboard for missing UINavigationController")
+                    }
+                    
+                    guard let recentPhotos = nav.children.first as? RecentPhotosViewController else {
                         fatalError("Check storyboard for missing recentViewController")
                     }
                     
@@ -78,13 +82,15 @@ class MessagesViewController: MSMessagesAppViewController {
     
     override func willTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
         
-        if(presentationStyle == .compact){
-              print("compact")
-        }
+       
         
     }
     
     override func didTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
+        
+        if(presentationStyle == .expanded){
+            print("explanded")
+        }
 
 //        switch(presentationStyle){
 //        case .compact:

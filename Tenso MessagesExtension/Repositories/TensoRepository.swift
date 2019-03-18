@@ -35,14 +35,16 @@ class TensoRepository  {
                     
                     x2Crop = firstFace
                     
-                    let halfway = CGRect(
-                        x: firstFace.minX / 2 ,
-                        y: firstFace.minY / 2 ,
-                        width: (x1.size.width + firstFace.width) / 2 ,
-                        height: (x1.size.height + firstFace.height) / 2)
+                    let secondZoomConstant : CGFloat = 2
+                    
+                    let secondZoom = CGRect(
+                        x: firstFace.minX / secondZoomConstant,
+                        y: firstFace.minY / secondZoomConstant ,
+                        width: (x1.size.width + firstFace.width) / secondZoomConstant ,
+                        height: (x1.size.height + firstFace.height) / secondZoomConstant)
                     
                     
-                    if let cutImageRef: CGImage = x1.cgImage?.cropping(to:halfway) {
+                    if let cutImageRef: CGImage = x1.cgImage?.cropping(to:secondZoom) {
                         
                         let x2: UIImage = UIImage(cgImage: cutImageRef)
                         
