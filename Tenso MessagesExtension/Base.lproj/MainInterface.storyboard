@@ -130,18 +130,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="PcU-Kf-5U0">
+                            <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="PcU-Kf-5U0">
                                 <rect key="frame" x="100" y="50" width="175" height="518"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oKg-Y2-QzJ">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oKg-Y2-QzJ">
                                         <rect key="frame" x="0.0" y="0.0" width="175" height="172.5"/>
                                         <color key="backgroundColor" red="0.42745100000000003" green="0.78823500000000002" blue="0.82352899999999996" alpha="1" colorSpace="calibratedRGB"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pWL-Ve-mS7">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pWL-Ve-mS7">
                                         <rect key="frame" x="0.0" y="172.5" width="175" height="173"/>
                                         <color key="backgroundColor" red="0.18823529410000001" green="0.70980392160000005" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mdD-AW-CPA">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mdD-AW-CPA">
                                         <rect key="frame" x="0.0" y="345.5" width="175" height="172.5"/>
                                         <color key="backgroundColor" red="0.98823529409999999" green="0.36078431370000003" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                     </imageView>
@@ -211,7 +211,6 @@
         <image name="FacesNormal" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="w2d-EB-VBU"/>
         <segue reference="xzs-gN-zff"/>
     </inferredMetricsTieBreakers>
 </document>
