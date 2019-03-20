@@ -145,25 +145,49 @@ extension MessagesViewController : MessagesAppConversationDeletgate {
         
         guard let conversation = activeConversation else { fatalError("Expected a conversation") }
         
-        let session = conversation.selectedMessage?.session ?? MSSession()
+       // let session = conversation.selectedMessage?.session ?? MSSession()
         
-        let message = MSMessage(session: session)
-        let layout = MSMessageTemplateLayout()
-        layout.image = photo
+//        let message = MSMessage(session: session)
+//        let layout = MSMessageTemplateLayout()
+//        layout.image = photo
+//
+//        message.layout = layout
+//
+//
+//        conversation.insert(message) { [weak self] error in
+//
+//
+//            if let errorMessage = error?.localizedDescription {
+//                print(errorMessage)
+//            }
+//
+//            complete()
+//
+//            guard let strongSelf = self else {return}
+//            strongSelf.dismiss()
+//        }
         
-        message.layout = layout
         
-        conversation.insert(message) { [weak self] error in
+        guard let imageData = photo.jpegData(compressionQuality: 0.3),
+            let docUrl = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first
+            else {
+                dismiss()
+                return
+        }
+        var attachmentPath : URL? = nil
+        attachmentPath = URL(fileURLWithPath: "tenso.jpg", relativeTo: docUrl)
+        if (try? imageData.write(to: attachmentPath!)) != nil {
             
-            
-            if let errorMessage = error?.localizedDescription {
-                print(errorMessage)
-            }
+            conversation.insertAttachment(attachmentPath!, withAlternateFilename: "tenso.jpg") { [weak self] (error) in
+                if let error = error {
+
+                    print(error.localizedDescription)
+                }
                 
-            complete()
-        
-            guard let strongSelf = self else {return}
-            strongSelf.dismiss()
+                 guard let strongSelf = self else {return}
+                 strongSelf.dismiss()
+                complete()
+            }
         }
 
        

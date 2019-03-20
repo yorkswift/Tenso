@@ -96,11 +96,14 @@ class TensoRepository  {
     
     func flatten(stack : TensoStack, onComplete completed : @escaping (_ final : UIImage) -> Void) -> Void {
         
-            DispatchQueue.global(qos: .userInitiated).async {
+        DispatchQueue.global(qos: .userInitiated).async {
         
         let photoSize = self.applyRatioToSize(stack.targetWidth)
 
         let finalPhotoSize = CGRect(x: 0, y: 0, width: photoSize.width, height: photoSize.height * CGFloat(integerLiteral: stack.targetCount))
+            
+            print(finalPhotoSize)
+            
         let renderer = UIGraphicsImageRenderer(size: finalPhotoSize.size)
 
         let compositeImage = renderer.image { context in
@@ -108,7 +111,9 @@ class TensoRepository  {
             for (index,possibleImage) in stack.stack.enumerated() {
 
                 if let image = possibleImage {
-                    let photoPosition = CGRect(x: 0 , y: CGFloat(index) * finalPhotoSize.height, width: finalPhotoSize.width, height: finalPhotoSize.height)
+                    let photoPosition = CGRect(x: 0 , y: CGFloat(index) * photoSize.height, width: photoSize.width, height: photoSize.height)
+                    
+                    print(photoPosition)
 
                     image.draw(in: photoPosition)
                 }

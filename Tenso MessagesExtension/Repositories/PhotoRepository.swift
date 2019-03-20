@@ -37,7 +37,7 @@ class PhotoRepository {
     }
     
     func fetchPhoto(for asset: PHAsset, at size: CGSize, completion block: @escaping (UIImage?)->()) {
-            
+
         imageManager.requestImage(for: asset, targetSize: size, contentMode: .aspectFit, options: requestOptions) { (image, _) in
             block(image)
         }
@@ -72,6 +72,21 @@ class PhotoRepository {
                 }
             }
         }
+    }
+    
+    func saveToLibrary(photo : UIImage){
+    
+
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.creationRequestForAsset(from: photo)
+                }) { (success:Bool, error:Error?) in
+                    if success {
+                    print("Image Saved Successfully")
+                } else {
+                    print("Error in saving:"+error.debugDescription)
+                }
+        }
+        
     }
     
     
