@@ -18,7 +18,9 @@ class TensoRepository  {
         DispatchQueue.global(qos: .userInitiated).async {
             
         var newStack = stack
-        PhotoRepository.shared.fetchPhoto(for: stack.asset, at: self.applyRatioToSize(500), completion: { image in
+        let photoSize = self.applyRatioToSize(stack.targetWidth)
+            
+        PhotoRepository.shared.fetchPhoto(for: stack.asset, at: photoSize, completion: { image in
             
             if let x1 = image {
                 
@@ -49,6 +51,8 @@ class TensoRepository  {
                         let x2: UIImage = UIImage(cgImage: cutImageRef)
                         
                         newStack.stack.append(x2)
+            
+                        
                         
                     }
                     
@@ -67,14 +71,18 @@ class TensoRepository  {
                     let x3: UIImage = UIImage(cgImage: cutImageRef)
                     
                     newStack.stack.append(x3)
-                 
                     
-                }
+                   
                     
-                DispatchQueue.main.sync {
-                    complete(newStack)
                 }
                 
+            }
+            
+            
+            newStack.stackComplete = true
+            
+            DispatchQueue.main.sync {
+                complete(newStack)
             }
     
         
@@ -82,6 +90,36 @@ class TensoRepository  {
             
         }
     
+        
+    }
+    
+    
+    func flatten(stack : TensoStack, onComplete completed : @escaping (_ final : UIImage) -> Void) -> Void {
+        
+            DispatchQueue.global(qos: .userInitiated).async {
+        
+        let photoSize = self.applyRatioToSize(stack.targetWidth)
+
+        let finalPhotoSize = CGRect(x: 0, y: 0, width: photoSize.width, height: photoSize.height * CGFloat(integerLiteral: stack.targetCount))
+        let renderer = UIGraphicsImageRenderer(size: finalPhotoSize.size)
+
+        let compositeImage = renderer.image { context in
+
+            for (index,possibleImage) in stack.stack.enumerated() {
+
+                if let image = possibleImage {
+                    let photoPosition = CGRect(x: 0 , y: CGFloat(index) * finalPhotoSize.height, width: finalPhotoSize.width, height: finalPhotoSize.height)
+
+                    image.draw(in: photoPosition)
+                }
+
+            }
+
+        }
+
+        completed(compositeImage)
+
+        }
         
     }
     

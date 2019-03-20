@@ -15,6 +15,9 @@ class TensoModeViewController : UITabBarController {
     var arrayOfImageNameForSelectedState = ["AutoSelected","FacesSelected"]
     var arrayOfImageNameForUnselectedState = ["AutoNormal","FacesNormal"]
     
+    var completedStack: TensoStack?
+    weak var messagesDelegate: MessagesAppConversationDeletgate?
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -45,6 +48,16 @@ class TensoModeViewController : UITabBarController {
                 
                 complete(newStack)
                 
+                if(newStack.stackComplete){
+                
+                    let sendButton : UIBarButtonItem = UIBarButtonItem(title: "Send", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.sendTensoAction))
+                    
+                    self.navigationItem.rightBarButtonItem = sendButton
+                    
+                    self.completedStack = newStack
+                    
+                }
+                
             })
             
             
@@ -70,6 +83,25 @@ class TensoModeViewController : UITabBarController {
             }
         }
         
+    }
+    
+    @objc func sendTensoAction(){
+        
+       
+        if let stack = completedStack {
+           
+            TensoRepository.shared.flatten(stack: stack, onComplete: { image in
+                
+                  print("completed image render")
+                
+                self.messagesDelegate?.send(photo: image, onCompletion: {
+                    print("sent")
+                })
+
+            })
+            
+        }
+
     }
     
 }

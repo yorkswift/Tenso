@@ -7,7 +7,7 @@ class RecentPhotosViewController : UICollectionViewController, UICollectionViewD
     var photos: PHFetchResult<PHAsset>!
     fileprivate var thumbnailSize: CGSize!
     
-    weak var delegate: RecentPhotoViewControllerDelegate?
+    weak var messagesDelegate: MessagesAppConversationDeletgate?
     
     enum Segues : String {
         case ShowTensoModeController
@@ -76,8 +76,8 @@ class RecentPhotosViewController : UICollectionViewController, UICollectionViewD
         
         let indexPath = collectionView!.indexPath(for: sender as! UICollectionViewCell)!
         destination.selectedPhotoIndex = indexPath.item
-        
-        delegate?.recentPhotosDidSelectPhoto(self)
+        destination.messagesDelegate = messagesDelegate
+    
         
     }
     
@@ -85,8 +85,11 @@ class RecentPhotosViewController : UICollectionViewController, UICollectionViewD
         
         guard let cell = collectionView.cellForItem(at: indexPath) as? RecentPhotoCell else { return }
         
+        messagesDelegate?.recentPhotosDidSelectPhoto(onCompletion: {
         
-        self.performSegue(withIdentifier: String(describing:Segues.ShowTensoModeController), sender: cell)
+            self.performSegue(withIdentifier: String(describing:Segues.ShowTensoModeController), sender: cell)
+        
+        })
         
     }
     

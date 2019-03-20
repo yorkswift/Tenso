@@ -47,5 +47,6 @@ class AutoModeViewController: UIViewController {
        
     }
     
+    
 
 }

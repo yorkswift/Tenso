@@ -2,9 +2,14 @@
 import UIKit
 import Messages
 
+typealias EmptyVoidClosure = () -> Void
+
 class MessagesViewController: MSMessagesAppViewController {
     
     weak private var recentPhotos: RecentPhotosViewController?
+    weak private var nav : UINavigationController?
+    
+    private var waitingClosure : EmptyVoidClosure?
     
     override func viewDidLoad() {
         
@@ -21,12 +26,14 @@ class MessagesViewController: MSMessagesAppViewController {
                         fatalError("Check storyboard for missing UINavigationController")
                     }
                     
+                    self.nav = nav
+                    
                     guard let recentPhotos = nav.children.first as? RecentPhotosViewController else {
                         fatalError("Check storyboard for missing recentViewController")
                     }
                     
                     self.recentPhotos = recentPhotos
-                    self.recentPhotos?.delegate = self
+                    self.recentPhotos?.messagesDelegate = self
                     
                     self.recentPhotos?.reload()
                     
@@ -82,14 +89,25 @@ class MessagesViewController: MSMessagesAppViewController {
     
     override func willTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
         
-       
+        if(presentationStyle == .expanded){
+            print("will expand")
+            
+           
+        }
         
     }
     
     override func didTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
         
         if(presentationStyle == .expanded){
-            print("explanded")
+           
+            print("did expand")
+            
+            if let waitingClosure = self.waitingClosure {
+                waitingClosure()
+                
+                self.waitingClosure = nil
+            }
         }
 
 //        switch(presentationStyle){
@@ -104,10 +122,52 @@ class MessagesViewController: MSMessagesAppViewController {
 
 }
 
-extension MessagesViewController : RecentPhotoViewControllerDelegate {
+extension MessagesViewController : MessagesAppConversationDeletgate {
+
     
-    func recentPhotosDidSelectPhoto(_ controller: RecentPhotosViewController) {
-        requestPresentationStyle(.expanded)
+    func recentPhotosDidSelectPhoto(onCompletion complete: @escaping EmptyVoidClosure) {
+        
+        if(self.presentationStyle == .compact){
+            
+            requestPresentationStyle(.expanded)
+            waitingClosure = complete
+            
+        } else {
+            
+            complete()
+            
+        }
+    
+        
     }
+    
+    func send(photo : UIImage, onCompletion complete: @escaping EmptyVoidClosure){
+        
+        guard let conversation = activeConversation else { fatalError("Expected a conversation") }
+        
+        let session = conversation.selectedMessage?.session ?? MSSession()
+        
+        let message = MSMessage(session: session)
+        let layout = MSMessageTemplateLayout()
+        layout.image = photo
+        
+        message.layout = layout
+        
+        conversation.insert(message) { [weak self] error in
+            
+            
+            if let errorMessage = error?.localizedDescription {
+                print(errorMessage)
+            }
+                
+            complete()
+        
+            guard let strongSelf = self else {return}
+            strongSelf.dismiss()
+        }
+
+       
+    }
+    
     
 }
