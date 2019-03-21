@@ -13,14 +13,19 @@ class TensoRepository  {
         return CGSize(width: size, height: size * iso216)
     }
     
+    func photoSize(for stack: TensoStack) -> CGSize {
+        
+         return CGSize(width: stack.targetWidth, height: stack.targetHeight)
+    
+    }
+    
     func renderTenso(for stack: TensoStack, on complete : @escaping (_ stack : TensoStack) -> Void) {
         
         DispatchQueue.global(qos: .userInitiated).async {
             
         var newStack = stack
-        let photoSize = self.applyRatioToSize(stack.targetWidth)
             
-        PhotoRepository.shared.fetchPhoto(for: stack.asset, at: photoSize, completion: { image in
+            PhotoRepository.shared.fetchPhoto(for: stack.asset, at: self.photoSize(for: stack), completion: { image in
             
             if let x1 = image {
                 
@@ -98,7 +103,7 @@ class TensoRepository  {
         
         DispatchQueue.global(qos: .userInitiated).async {
         
-        let photoSize = self.applyRatioToSize(stack.targetWidth)
+        let photoSize = CGSize(width: stack.targetWidth, height: stack.targetHeight)
 
         let finalPhotoSize = CGRect(x: 0, y: 0, width: photoSize.width, height: photoSize.height * CGFloat(integerLiteral: stack.targetCount))
             
