@@ -2,6 +2,10 @@
 import Foundation
 import Photos
 
+import Accelerate
+import simd
+
+
 class TensoRepository  {
     
     static let shared = TensoRepository()
@@ -13,19 +17,13 @@ class TensoRepository  {
         return CGSize(width: size, height: size * iso216)
     }
     
-    func photoSize(for stack: TensoStack) -> CGSize {
-        
-         return CGSize(width: stack.targetWidth, height: stack.targetHeight)
-    
-    }
-    
     func renderTenso(for stack: TensoStack, on complete : @escaping (_ stack : TensoStack) -> Void) {
         
         DispatchQueue.global(qos: .userInitiated).async {
             
-        var newStack = stack
+            var newStack = stack
             
-            PhotoRepository.shared.fetchPhoto(for: stack.asset, at: self.photoSize(for: stack), completion: { image in
+            PhotoRepository.shared.fetchPhoto(for: newStack.asset, at: newStack.size, completion: { image in
             
             if let x1 = image {
                 
@@ -44,11 +42,27 @@ class TensoRepository  {
                     
                     let secondZoomConstant : CGFloat = 2
                     
-                    let secondZoom = CGRect(
-                        x: firstFace.minX / secondZoomConstant,
-                        y: firstFace.minY / secondZoomConstant ,
-                        width: (x1.size.width + firstFace.width) / secondZoomConstant ,
-                        height: (x1.size.height + firstFace.height) / secondZoomConstant)
+                   // let secondZoom = CGRect(
+//                        x: firstFace.minX / secondZoomConstant,
+//                        y: firstFace.minY / secondZoomConstant ,
+//                        width: (x1.size.width + firstFace.width) / secondZoomConstant ,
+//                        height: (x1.size.height + firstFace.height) / secondZoomConstant)
+                    
+                    
+                    let zooms: [CGRect] = stride(from: 0.0, to: 1.0, by: 1 / 10).map { x in
+                        
+                       return CGRect(
+                        x: CGFloat(simd_mix(Float(0), Float(firstFace.minX), Float(x) )),
+                        y:  CGFloat(simd_mix(Float(0), Float(firstFace.minY), Float(x) )),
+                        width: CGFloat(simd_mix(Float(x1.size.width), Float(firstFace.width), Float(x) )),
+                        height: CGFloat(simd_mix(Float(x1.size.height), Float(firstFace.height), Float(x) ))
+                        )
+                    
+                    }
+                    
+                    print(zooms)
+                    
+                    let secondZoom = self.tween(between: x1, and: firstFace, by: 2)
                     
                     
                     if let cutImageRef: CGImage = x1.cgImage?.cropping(to:secondZoom) {
@@ -56,8 +70,16 @@ class TensoRepository  {
                         let x2: UIImage = UIImage(cgImage: cutImageRef)
                         
                         newStack.stack.append(x2)
-            
                         
+                    }
+                    
+                    let thirdZoom = self.tween(between: x1, and: firstFace, by: 0.9)
+                    
+                    if let cutImageRef: CGImage = x1.cgImage?.cropping(to:thirdZoom) {
+                        
+                        let x3: UIImage = UIImage(cgImage: cutImageRef)
+                        
+                        newStack.stack.append(x3)
                         
                     }
                     
@@ -68,18 +90,21 @@ class TensoRepository  {
                                   width: 200,
                                   height: 200)
                     
+                    
+                    if let cutImageRef: CGImage = x1.cgImage?.cropping(to:x2Crop) {
+                        
+                        let x2: UIImage = UIImage(cgImage: cutImageRef)
+                        
+                        newStack.stack.append(x2)
+                        
+                    }
+                    
+                    
+                    
                 }
                 
-                //x3
-                if let cutImageRef: CGImage = x1.cgImage?.cropping(to:x2Crop) {
-                    
-                    let x3: UIImage = UIImage(cgImage: cutImageRef)
-                    
-                    newStack.stack.append(x3)
-                    
-                   
-                    
-                }
+                
+               
                 
             }
             
@@ -98,16 +123,32 @@ class TensoRepository  {
         
     }
     
+    func tween(between: UIImage, and finish :CGRect, by factor : CGFloat) -> CGRect {
+        
+
+        let inverseFactor = (1 / (1 - factor))
+        
+        return CGRect(
+            x: finish.minX / inverseFactor,
+            y: finish.minY / inverseFactor ,
+            width: (between.size.width + finish.width) / inverseFactor ,
+            height: (between.size.height + finish.height) / inverseFactor)
+        
+    }
+    
+    func interpolate(value: CGFloat, factor : CGFloat){
+        
+    }
+    
     
     func flatten(stack : TensoStack, onComplete completed : @escaping (_ final : UIImage) -> Void) -> Void {
         
-        DispatchQueue.global(qos: .userInitiated).async {
+        let targetWidth = stack.size.width
+        let targetHeight = stack.size.height
         
-        let photoSize = CGSize(width: stack.targetWidth, height: stack.targetHeight)
-
-        let finalPhotoSize = CGRect(x: 0, y: 0, width: photoSize.width, height: photoSize.height * CGFloat(integerLiteral: stack.targetCount))
+        DispatchQueue.global(qos: .userInitiated).async {
             
-            print(finalPhotoSize)
+        let finalPhotoSize = CGRect(x: 0, y: 0, width: targetWidth, height: targetHeight * CGFloat(integerLiteral: stack.targetCount))
             
         let renderer = UIGraphicsImageRenderer(size: finalPhotoSize.size)
 
@@ -116,11 +157,22 @@ class TensoRepository  {
             for (index,possibleImage) in stack.stack.enumerated() {
 
                 if let image = possibleImage {
-                    let photoPosition = CGRect(x: 0 , y: CGFloat(index) * photoSize.height, width: photoSize.width, height: photoSize.height)
                     
-                    print(photoPosition)
+                    var scaledImageRect = CGRect.zero
+                    
+                    let aspectWidth:CGFloat = targetWidth / image.size.width
+                    let aspectHeight:CGFloat = targetHeight / image.size.height
+                    let aspectRatio:CGFloat = min(aspectWidth, aspectHeight)
+                    
+                    scaledImageRect.size.width = image.size.width * aspectRatio
+                    scaledImageRect.size.height = image.size.height * aspectRatio
+                    scaledImageRect.origin.x = 0
+                    scaledImageRect.origin.y = CGFloat(index) * targetHeight
+                    
+                    //let photoPosition = CGRect(x: 0 , y: CGFloat(index) * targetHeight, width: targetWidth, height: targetHeight)
 
-                    image.draw(in: photoPosition)
+                    image.draw(in: scaledImageRect)
+                    
                 }
 
             }

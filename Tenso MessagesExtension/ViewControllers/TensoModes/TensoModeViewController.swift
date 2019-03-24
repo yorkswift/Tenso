@@ -42,7 +42,7 @@ class TensoModeViewController : UITabBarController {
         switch(mode){
         case .Auto:
             
-            let tenso = TensoStack(for: asset)
+            let tenso = TensoStack(for: asset, targetSize: CGSize(width: 300, height: 145))
             
             TensoRepository.shared.renderTenso(for: tenso, on: { newStack in
                 
@@ -90,18 +90,40 @@ class TensoModeViewController : UITabBarController {
        
         if let stack = completedStack {
            
-            TensoRepository.shared.flatten(stack: stack, onComplete: { image in
-                
-                  print("completed image render")
-                
-                self.messagesDelegate?.send(photo: image, onCompletion: {
-                    print("sent")
-                })
+//            TensoRepository.shared.flatten(stack: stack, onComplete: { image in
+//
+//                  print("completed image render")
+//
+//                self.messagesDelegate?.send(photo: image, onCompletion: {
+//                    print("sent")
+//                })
+//
+//            })
+            
+            if let modeView = self.selectedViewController as? AutoModeViewController {
+                if let image = renderImage(from: modeView.TensoStackView) {
 
-            })
+                    self.messagesDelegate?.send(photo: image, onCompletion: {
+                        print("sent")
+                    })
+
+                }
+            
+            }
             
         }
 
+    }
+    
+    func renderImage(from view: UIView) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.isOpaque, 0.0)
+        defer { UIGraphicsEndImageContext() }
+        if let context = UIGraphicsGetCurrentContext() {
+            view.layer.render(in: context)
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            return image
+        }
+        return nil
     }
     
 }
