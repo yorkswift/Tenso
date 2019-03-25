@@ -40,7 +40,7 @@ class TensoRepository  {
                     
                     x2Crop = firstFace
                     
-                    let secondZoomConstant : CGFloat = 2
+                 //   let secondZoomConstant : CGFloat = 2
                     
                    // let secondZoom = CGRect(
 //                        x: firstFace.minX / secondZoomConstant,
@@ -50,38 +50,49 @@ class TensoRepository  {
                     
                     
                     let zooms: [CGRect] = stride(from: 0.0, to: 1.0, by: 1 / 10).map { x in
+                    
+                        let originX = simd_mix(0.0, Double(firstFace.minX), x )
+                        let originY = simd_mix(0.0, Double(firstFace.minY), x )
                         
-                       return CGRect(
-                        x: CGFloat(simd_mix(Float(0), Float(firstFace.minX), Float(x) )),
-                        y:  CGFloat(simd_mix(Float(0), Float(firstFace.minY), Float(x) )),
-                        width: CGFloat(simd_mix(Float(x1.size.width), Float(firstFace.width), Float(x) )),
-                        height: CGFloat(simd_mix(Float(x1.size.height), Float(firstFace.height), Float(x) ))
-                        )
+                        let origin = CGPoint(x: originX, y: originY)
+                        
+                        let height = simd_mix(Double(x1.size.height), Double(firstFace.height), x)
+                        let width = simd_mix(Double(x1.size.width), Double(firstFace.width), x)
+                        
+                        let size = CGSize(width: width, height: height)
+                        
+                        return CGRect(origin: origin, size: size)
                     
                     }
                     
                     print(zooms)
                     
-                    let secondZoom = self.tween(between: x1, and: firstFace, by: 2)
                     
-                    
-                    if let cutImageRef: CGImage = x1.cgImage?.cropping(to:secondZoom) {
+                    if let midwayZoom = Array(zooms.suffix(6)).first {
                         
-                        let x2: UIImage = UIImage(cgImage: cutImageRef)
-                        
-                        newStack.stack.append(x2)
+                        if let cutImageRef: CGImage = x1.cgImage?.cropping(to:midwayZoom) {
+                            
+                            let x2: UIImage = UIImage(cgImage: cutImageRef)
+                            
+                            newStack.stack.append(x2)
+                            
+                        }
                         
                     }
                     
-                    let thirdZoom = self.tween(between: x1, and: firstFace, by: 0.9)
                     
-                    if let cutImageRef: CGImage = x1.cgImage?.cropping(to:thirdZoom) {
-                        
-                        let x3: UIImage = UIImage(cgImage: cutImageRef)
-                        
-                        newStack.stack.append(x3)
+                    if let penultimateZoom = Array(zooms.suffix(3)).first {
+                    
+                        if let cutImageRef: CGImage = x1.cgImage?.cropping(to:penultimateZoom) {
+                            
+                            let x3: UIImage = UIImage(cgImage: cutImageRef)
+                            
+                            newStack.stack.append(x3)
+                            
+                        }
                         
                     }
+
                     
                 } else {
                
