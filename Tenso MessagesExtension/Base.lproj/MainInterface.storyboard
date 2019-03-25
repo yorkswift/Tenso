@@ -103,7 +103,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coming soon..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sjU-YT-ics">
-                                <rect key="frame" x="102.5" y="259.5" width="115" height="21"/>
+                                <rect key="frame" x="102.5" y="253.5" width="115" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -134,16 +134,19 @@
                                 <rect key="frame" x="47" y="90" width="226" height="328"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oKg-Y2-QzJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="226" height="109.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="226" height="82"/>
                                         <color key="backgroundColor" red="0.42745100000000003" green="0.78823500000000002" blue="0.82352899999999996" alpha="1" colorSpace="calibratedRGB"/>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pWL-Ve-mS7">
-                                        <rect key="frame" x="0.0" y="109.5" width="226" height="109"/>
+                                        <rect key="frame" x="0.0" y="82" width="226" height="82"/>
                                         <color key="backgroundColor" red="0.18823529410000001" green="0.70980392160000005" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mdD-AW-CPA">
-                                        <rect key="frame" x="0.0" y="218.5" width="226" height="109.5"/>
+                                        <rect key="frame" x="0.0" y="164" width="226" height="82"/>
                                         <color key="backgroundColor" red="0.98823529409999999" green="0.36078431370000003" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ORI-vi-85R">
+                                        <rect key="frame" x="0.0" y="246" width="226" height="82"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
@@ -188,10 +191,10 @@
             </objects>
             <point key="canvasLocation" x="2393" y="75"/>
         </scene>
-        <!--Messages Navigation Controller-->
+        <!--Navigation Controller-->
         <scene sceneID="1iO-jo-QuK">
             <objects>
-                <navigationController modalTransitionStyle="crossDissolve" id="SD4-qf-INR" customClass="MessagesNavigationController" customModule="Tenso_MessagesExtension" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController modalTransitionStyle="crossDissolve" id="SD4-qf-INR" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="A0G-AE-FZj">
                         <rect key="frame" x="0.0" y="20" width="320" height="32"/>
                         <autoresizingMask key="autoresizingMask"/>

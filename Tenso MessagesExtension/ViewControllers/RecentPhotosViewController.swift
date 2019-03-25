@@ -97,8 +97,7 @@ class RecentPhotosViewController : UICollectionViewController, UICollectionViewD
 //        
 //        self.performSegue(withIdentifier: String(describing:Segues.HideTensoModeController), sender: nil)
 //        
-//    }
-//    
+//    }    
     
     // MARK: UICollectionViewDelegateFlowLayout
     

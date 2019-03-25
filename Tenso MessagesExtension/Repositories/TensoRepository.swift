@@ -5,17 +5,9 @@ import Photos
 import Accelerate
 import simd
 
-
 class TensoRepository  {
     
     static let shared = TensoRepository()
-    
-    let iso216 = 2.squareRoot()
-    
-    func applyRatioToSize(_ size : Double) ->  CGSize {
-        
-        return CGSize(width: size, height: size * iso216)
-    }
     
     func renderTenso(for stack: TensoStack, on complete : @escaping (_ stack : TensoStack) -> Void) {
         
@@ -33,80 +25,68 @@ class TensoRepository  {
                     complete(newStack)
                 }
                 
-                //x2
-                var x2Crop : CGRect
+                let x1Rect = CGRect(origin: CGPoint.zero, size: x1.size)
                 
+
                 if let firstFace = FeatureRepository.shared.detectFaces(in: x1)?.first {
                     
-                    x2Crop = firstFace
                     
-                 //   let secondZoomConstant : CGFloat = 2
-                    
-                   // let secondZoom = CGRect(
-//                        x: firstFace.minX / secondZoomConstant,
-//                        y: firstFace.minY / secondZoomConstant ,
-//                        width: (x1.size.width + firstFace.width) / secondZoomConstant ,
-//                        height: (x1.size.height + firstFace.height) / secondZoomConstant)
+                    let zooms = self.interpolate(start: x1Rect, finish: firstFace)
                     
                     
-                    let zooms: [CGRect] = stride(from: 0.0, to: 1.0, by: 1 / 10).map { x in
-                    
-                        let originX = simd_mix(0.0, Double(firstFace.minX), x )
-                        let originY = simd_mix(0.0, Double(firstFace.minY), x )
+                    if let midwayZoom = Array(zooms.suffix(4)).first {
                         
-                        let origin = CGPoint(x: originX, y: originY)
+                        self.append(x1, cropped: midwayZoom, to: &newStack)
                         
-                        let height = simd_mix(Double(x1.size.height), Double(firstFace.height), x)
-                        let width = simd_mix(Double(x1.size.width), Double(firstFace.width), x)
-                        
-                        let size = CGSize(width: width, height: height)
-                        
-                        return CGRect(origin: origin, size: size)
-                    
                     }
                     
-                    print(zooms)
+                    if let penultimateZoom = Array(zooms.suffix(2)).first {
+                        
+                        self.append(x1, cropped: penultimateZoom, to: &newStack)
+                        
+                    }
+                    
+                    
+                    if let penultimateZoom = Array(zooms.suffix(1)).first {
+                    
+                        self.append(x1, cropped: penultimateZoom, to: &newStack)
+                
+                    }
+
+                } else {
+                    
+                    // no faces found
+                    
+                    let focusPoint : CGFloat = 20
+                
+                    
+                    let randomPoint = CGPoint(x: CGFloat.random(in: x1Rect.minX...x1Rect.maxX), y: CGFloat.random(in: x1Rect.minY...x1Rect.maxY))
+                    
+                    
+                    let randomCrop = CGRect(x: randomPoint.x - (focusPoint / 2),
+                                    y: randomPoint.y - (focusPoint / 2),
+                                    width: focusPoint,
+                                    height: focusPoint)
+                    
+                    let zooms = self.interpolate(start: x1Rect, finish: randomCrop)
                     
                     
                     if let midwayZoom = Array(zooms.suffix(6)).first {
                         
-                        if let cutImageRef: CGImage = x1.cgImage?.cropping(to:midwayZoom) {
-                            
-                            let x2: UIImage = UIImage(cgImage: cutImageRef)
-                            
-                            newStack.stack.append(x2)
-                            
-                        }
+                        self.append(x1, cropped: midwayZoom, to: &newStack)
+                        
+                    }
+                    
+                    if let penultimateZoom = Array(zooms.suffix(4)).first {
+                        
+                        self.append(x1, cropped: penultimateZoom, to: &newStack)
                         
                     }
                     
                     
-                    if let penultimateZoom = Array(zooms.suffix(3)).first {
-                    
-                        if let cutImageRef: CGImage = x1.cgImage?.cropping(to:penultimateZoom) {
-                            
-                            let x3: UIImage = UIImage(cgImage: cutImageRef)
-                            
-                            newStack.stack.append(x3)
-                            
-                        }
+                    if let penultimateZoom = Array(zooms.suffix(2)).first {
                         
-                    }
-
-                    
-                } else {
-               
-                    x2Crop = CGRect(x: 0,
-                                  y: 0,
-                                  width: 200,
-                                  height: 200)
-                    
-                    
-                    if let cutImageRef: CGImage = x1.cgImage?.cropping(to:x2Crop) {
-                        
-                        let x2: UIImage = UIImage(cgImage: cutImageRef)
-                        
-                        newStack.stack.append(x2)
+                        self.append(x1, cropped: penultimateZoom, to: &newStack)
                         
                     }
                     
@@ -134,23 +114,37 @@ class TensoRepository  {
         
     }
     
-    func tween(between: UIImage, and finish :CGRect, by factor : CGFloat) -> CGRect {
+    func interpolate(start: CGRect, finish : CGRect) ->  [CGRect]{
         
+        return stride(from: 0.0, to: 1.0, by: 1 / 10).map { x in
+            
+            let originX = simd_mix(Double(start.minX), Double(finish.minX), x )
+            let originY = simd_mix(Double(start.minY), Double(finish.minY), x )
+            
+            let origin = CGPoint(x: originX, y: originY)
+            
+            let height = simd_mix(Double(start.height), Double(finish.height), x)
+            let width = simd_mix(Double(start.width), Double(finish.width), x)
+            
+            let size = CGSize(width: width, height: height)
+            
+            return CGRect(origin: origin, size: size)
+            
+        }
+    
+    }
+    
+    func append(_ source: UIImage, cropped crop: CGRect, to currentStack : inout TensoStack ){
 
-        let inverseFactor = (1 / (1 - factor))
-        
-        return CGRect(
-            x: finish.minX / inverseFactor,
-            y: finish.minY / inverseFactor ,
-            width: (between.size.width + finish.width) / inverseFactor ,
-            height: (between.size.height + finish.height) / inverseFactor)
-        
-    }
-    
-    func interpolate(value: CGFloat, factor : CGFloat){
+        if let cutImageRef: CGImage = source.cgImage?.cropping(to:crop) {
+            
+            let x2: UIImage = UIImage(cgImage: cutImageRef)
+            
+            currentStack.stack.append(x2)
+            
+        }
         
     }
-    
     
     func flatten(stack : TensoStack, onComplete completed : @escaping (_ final : UIImage) -> Void) -> Void {
         
