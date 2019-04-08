@@ -120,7 +120,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3yj-2g-o0h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3584" y="487"/>
+            <point key="canvasLocation" x="3584" y="934"/>
         </scene>
         <!--AutoTenso-->
         <scene sceneID="lpv-kQ-UJ3">
@@ -131,34 +131,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="PcU-Kf-5U0">
-                                <rect key="frame" x="47" y="90" width="226" height="328"/>
+                                <rect key="frame" x="30" y="79" width="260" height="377"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oKg-Y2-QzJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="226" height="82"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oKg-Y2-QzJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="260" height="125.5"/>
                                         <color key="backgroundColor" red="0.42745100000000003" green="0.78823500000000002" blue="0.82352899999999996" alpha="1" colorSpace="calibratedRGB"/>
                                     </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pWL-Ve-mS7">
-                                        <rect key="frame" x="0.0" y="82" width="226" height="82"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pWL-Ve-mS7">
+                                        <rect key="frame" x="0.0" y="125.5" width="260" height="126"/>
                                         <color key="backgroundColor" red="0.18823529410000001" green="0.70980392160000005" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                     </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mdD-AW-CPA">
-                                        <rect key="frame" x="0.0" y="164" width="226" height="82"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mdD-AW-CPA">
+                                        <rect key="frame" x="0.0" y="251.5" width="260" height="125.5"/>
                                         <color key="backgroundColor" red="0.98823529409999999" green="0.36078431370000003" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ORI-vi-85R">
-                                        <rect key="frame" x="0.0" y="246" width="226" height="82"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="PcU-Kf-5U0" secondAttribute="height" multiplier="300:435" id="dKf-Em-Z5F"/>
+                                    <constraint firstAttribute="width" secondItem="PcU-Kf-5U0" secondAttribute="height" multiplier="300:435" id="eP3-ih-7ea"/>
                                 </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="0.10000000000000001" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="PcU-Kf-5U0" firstAttribute="centerX" secondItem="SI4-w9-TI0" secondAttribute="centerX" id="9Hd-G0-ujO"/>
-                            <constraint firstItem="PcU-Kf-5U0" firstAttribute="centerY" secondItem="SI4-w9-TI0" secondAttribute="centerY" id="Dtn-yK-Tei"/>
-                            <constraint firstItem="PcU-Kf-5U0" firstAttribute="top" secondItem="09C-tB-3aU" secondAttribute="top" constant="26" id="hdh-Ut-bYF"/>
+                            <constraint firstItem="09C-tB-3aU" firstAttribute="bottom" secondItem="PcU-Kf-5U0" secondAttribute="bottom" constant="20" id="01N-Iw-ZBj"/>
+                            <constraint firstItem="PcU-Kf-5U0" firstAttribute="leading" secondItem="SI4-w9-TI0" secondAttribute="leading" constant="30" id="Pfb-fB-8CY"/>
+                            <constraint firstAttribute="trailing" secondItem="PcU-Kf-5U0" secondAttribute="trailing" constant="30" id="k2Q-FZ-ToV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="09C-tB-3aU"/>
                     </view>
@@ -169,7 +166,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t3Q-Va-0W1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3584" y="-103"/>
+            <point key="canvasLocation" x="3583.8080959520244" y="-104"/>
         </scene>
         <!--Tenso Mode View Controller-->
         <scene sceneID="tVh-nC-lOb">

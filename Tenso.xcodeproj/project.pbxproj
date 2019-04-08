@@ -141,7 +141,7 @@
 				1AB7BBCE22497E850065A092 /* Extensions */,
 				1ADA981E2239963C00F84878 /* ViewCells */,
 				1A3ED7B82235C92500632412 /* TensoModes */,
-				1A3ED7B92235C93E00632412 /* AutoModeViewController.swift */,
+				1A3ED7B422343B0400632412 /* TensoModeViewController.swift */,
 				1A03A552223090A90076647C /* RecentPhotosViewController.swift */,
 				1A03A53E2230852B0076647C /* MessagesViewController.swift */,
 			);
@@ -161,8 +161,8 @@
 		1A3ED7B82235C92500632412 /* TensoModes */ = {
 			isa = PBXGroup;
 			children = (
+				1A3ED7B92235C93E00632412 /* AutoModeViewController.swift */,
 				1A3ED7BB2235C94E00632412 /* FacesModeViewController.swift */,
-				1A3ED7B422343B0400632412 /* TensoModeViewController.swift */,
 			);
 			path = TensoModes;
 			sourceTree = "<group>";

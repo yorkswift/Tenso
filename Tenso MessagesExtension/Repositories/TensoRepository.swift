@@ -5,6 +5,8 @@ import Photos
 import Accelerate
 import simd
 
+import AVFoundation
+
 class TensoRepository  {
     
     static let shared = TensoRepository()
@@ -19,43 +21,75 @@ class TensoRepository  {
             
             if let x1 = image {
                 
-                newStack.stack.append(x1)
-                
-                DispatchQueue.main.sync {
-                    complete(newStack)
-                }
-                
                 let x1Rect = CGRect(origin: CGPoint.zero, size: x1.size)
                 
-
+                let targetSize = CGSize(width: 300, height: 145)
+                
+                let aspectRect = AVMakeRect(aspectRatio: targetSize, insideRect: x1Rect)
+                
+                
                 if let firstFace = FeatureRepository.shared.detectFaces(in: x1)?.first {
+               
                     
                     
-                    let zooms = self.interpolate(start: x1Rect, finish: firstFace)
+                    
+                    let aspectFace = AVMakeRect(aspectRatio: targetSize, insideRect: firstFace)
+                    
+                    let zooms = self.interpolate(start: aspectRect, finish: aspectFace)
+                    
+                    
+                    self.append(x1, cropped: aspectRect, to: &newStack, focusRect: firstFace)
                     
                     
                     if let midwayZoom = Array(zooms.suffix(4)).first {
                         
-                        self.append(x1, cropped: midwayZoom, to: &newStack)
+                        let cropRect = midwayZoom
+                            .applying(CGAffineTransform(translationX: 0, y: -(midwayZoom.height / 3)))
+                            .applying(CGAffineTransform(scaleX: 1.0/CGFloat(x1.size.width), y: 1.0/CGFloat(x1.size.height)))
+                        
+                        PhotoRepository.shared.fetchCroppedPhoto(for: newStack.asset, at: targetSize, cropped: cropRect, completion: { image in
+                            
+                            if let x2 = image {
+                                
+                                self.append(x2, cropped: nil, to: &newStack, focusRect: firstFace)
+                                
+
+                            if let penultimateZoom = Array(zooms.suffix(1)).first {
+                                
+                                let cropRect = penultimateZoom
+                                    .applying(CGAffineTransform(translationX: 0, y: -(midwayZoom.height / 6)))
+                                        .applying(CGAffineTransform(scaleX: 1.0/CGFloat(x1.size.width), y: 1.0/CGFloat(x1.size.height)))
+                                
+                                PhotoRepository.shared.fetchCroppedPhoto(for: newStack.asset, at: targetSize, cropped: cropRect, completion: { image in
+                                    
+                                    if let x3 = image {
+                                        self.append(x3, cropped: nil, to: &newStack, focusRect: firstFace)
+                                        
+                                    }
+                                    
+                                })
+                                
+                            }
+                                
+                            }
+                            
+                            
+                        })
                         
                     }
                     
-                    if let penultimateZoom = Array(zooms.suffix(2)).first {
-                        
-                        self.append(x1, cropped: penultimateZoom, to: &newStack)
-                        
-                    }
                     
-                    
-                    if let penultimateZoom = Array(zooms.suffix(1)).first {
-                    
-                        self.append(x1, cropped: penultimateZoom, to: &newStack)
                 
-                    }
 
                 } else {
                     
                     // no faces found
+                    
+                    newStack.stack.append(x1)
+                    
+                    DispatchQueue.main.sync {
+                        complete(newStack)
+                    }
                     
                     let focusPoint : CGFloat = 20
                 
@@ -73,20 +107,20 @@ class TensoRepository  {
                     
                     if let midwayZoom = Array(zooms.suffix(6)).first {
                         
-                        self.append(x1, cropped: midwayZoom, to: &newStack)
+                        self.append(x1, cropped: midwayZoom, to: &newStack, focusRect: nil)
                         
                     }
                     
                     if let penultimateZoom = Array(zooms.suffix(4)).first {
                         
-                        self.append(x1, cropped: penultimateZoom, to: &newStack)
+                        self.append(x1, cropped: penultimateZoom, to: &newStack, focusRect: nil)
                         
                     }
                     
                     
                     if let penultimateZoom = Array(zooms.suffix(2)).first {
                         
-                        self.append(x1, cropped: penultimateZoom, to: &newStack)
+                        self.append(x1, cropped: penultimateZoom, to: &newStack, focusRect: nil)
                         
                     }
                     
@@ -134,14 +168,28 @@ class TensoRepository  {
     
     }
     
-    func append(_ source: UIImage, cropped crop: CGRect, to currentStack : inout TensoStack ){
-
-        if let cutImageRef: CGImage = source.cgImage?.cropping(to:crop) {
+    func append(_ source: UIImage, cropped crop: CGRect?, to currentStack : inout TensoStack, focusRect : CGRect?){
+        
+      //  var sourceImage: UIImage
+//        if let focusedRect = focusRect  {
+//           sourceImage = drawRectangleOnImage(image: source, rectangle: focusedRect)
+//        } else {
+          //  sourceImage = source
+       // }
+        
+       
+        if let cropped = crop {
             
-            let x2: UIImage = UIImage(cgImage: cutImageRef)
+            if let cutImageRef: CGImage = source.cgImage?.cropping(to:cropped) {
             
-            currentStack.stack.append(x2)
+                let x2: UIImage = UIImage(cgImage: cutImageRef)
+    
+                currentStack.stack.append(x2)
             
+             }
+            
+        } else {
+             currentStack.stack.append(source)
         }
         
     }
@@ -187,6 +235,32 @@ class TensoRepository  {
         completed(compositeImage)
 
         }
+        
+    }
+    
+    func drawRectangleOnImage(image: UIImage, rectangle: CGRect) -> UIImage {
+        
+        let imageSize = image.size
+        let scale: CGFloat = 0
+        
+        UIGraphicsBeginImageContextWithOptions(imageSize, false, scale)
+        
+        image.draw(at: CGPoint.zero)
+        
+        guard let context = UIGraphicsGetCurrentContext() else { return image }
+        
+        context.setLineWidth(1.0)
+        context.addRect(rectangle)
+        context.setStrokeColor(UIColor.cyan.cgColor)
+        context.strokePath()
+        
+        guard let newImage = UIGraphicsGetImageFromCurrentImageContext() else {
+             UIGraphicsEndImageContext()
+            return image
+            
+        }
+        UIGraphicsEndImageContext()
+        return newImage
         
     }
     

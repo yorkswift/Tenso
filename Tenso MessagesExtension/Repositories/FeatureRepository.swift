@@ -9,50 +9,29 @@ class FeatureRepository {
     let context = CIContext()
     let options = [CIDetectorAccuracy: CIDetectorAccuracyHigh]
     
-    init() {
-        
-        
-    }
-    
     func detectFaces(in photo : UIImage) -> [CGRect]? {
         
         let photoHeight = photo.size.height
         
         let transform = CGAffineTransform(scaleX: 1, y: -1).translatedBy(x: 0, y: -photoHeight)
         
-        if let faceDetector = CIDetector(ofType: CIDetectorTypeFace, context: context, options: options){
+        guard let faceDetector = CIDetector(ofType: CIDetectorTypeFace, context: context, options: options) else { return nil }
         
-            if let coreImagePhoto = convertToCoreImage(from : photo){
+        guard let coreImagePhoto = convertToCoreImage(from : photo) else { return nil }
             
-                let faces = faceDetector.features(in: coreImagePhoto)
+        let faces = faceDetector.features(in: coreImagePhoto)
             
-                if let randomFace = faces.randomElement() as? CIFaceFeature {
-                    
-                    return [randomFace.bounds.applying(transform)]
-
-                }
+        guard let randomFace = faces.randomElement() as? CIFaceFeature else { return nil }
                 
-            }
-        
-        }
-        return nil
-    }
-    
-    private func zoomOutFace(with bounds:CGRect) -> (CGRect){
-        
-       return bounds.insetBy(dx: -66, dy: -66)
-        
+        return [randomFace.bounds.applying(transform)]
+
     }
     
     private func convertToCoreImage(from image: UIImage) -> (CIImage?) {
         
-        if let coreGraphicsImage = image.cgImage {
+        guard let coreGraphicsImage = image.cgImage else { return nil }
             
-            return CIImage(cgImage: coreGraphicsImage, options: [CIImageOption.applyOrientationProperty:true])
-            
-        }
-    
-        return nil
+        return CIImage(cgImage: coreGraphicsImage, options: [CIImageOption.applyOrientationProperty:true])
         
     }
     

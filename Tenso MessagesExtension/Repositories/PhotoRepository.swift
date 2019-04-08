@@ -44,6 +44,22 @@ class PhotoRepository {
        
     }
     
+    func fetchCroppedPhoto(for asset: PHAsset, at size: CGSize, cropped : CGRect, completion block: @escaping (UIImage?)->()) {
+        
+        let retinaScale = UIScreen.main.scale * 5
+        let targetSize = CGSize(width: size.width * retinaScale, height: size.height * retinaScale)
+        
+        let cropOptions = PHImageRequestOptions()
+        cropOptions.isSynchronous = true
+        cropOptions.resizeMode = .exact
+        cropOptions.normalizedCropRect = cropped
+            
+            imageManager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFit, options: cropOptions) { (image, _) in
+                block(image)
+        }
+        
+    }
+    
     public func checkAuthorisation(onComplete handleCompletion: @escaping (PHAuthorizationStatus)->()) {
         
         let status = PHPhotoLibrary.authorizationStatus()
