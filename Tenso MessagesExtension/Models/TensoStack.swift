@@ -17,7 +17,6 @@ struct TensoStack {
     
     var composite : UIImage?
     
-    
     init(for photo: PHAsset, targetSize : CGSize){
         
         asset = photo

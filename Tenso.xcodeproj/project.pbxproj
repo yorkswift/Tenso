@@ -21,9 +21,14 @@
 		1A3ED7B72235A69400632412 /* TensoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3ED7B62235A69400632412 /* TensoRepository.swift */; };
 		1A3ED7BA2235C93E00632412 /* AutoModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3ED7B92235C93E00632412 /* AutoModeViewController.swift */; };
 		1A3ED7BC2235C94E00632412 /* FacesModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3ED7BB2235C94E00632412 /* FacesModeViewController.swift */; };
+		1A7C7BE7225D369300DD7EC8 /* CreateTensoZoomOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7C7BE6225D369300DD7EC8 /* CreateTensoZoomOperation.swift */; };
 		1A9B8E352236EDF10099B159 /* TensoStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B8E342236EDF10099B159 /* TensoStack.swift */; };
 		1AB7BBCD22497E1D0065A092 /* MessagesViewController+MessagesAppConversationDeletgate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB7BBCC22497E1D0065A092 /* MessagesViewController+MessagesAppConversationDeletgate.swift */; };
+		1AC8FF38225FD72500DD3902 /* PerformCompletionHandlerOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC8FF37225FD72500DD3902 /* PerformCompletionHandlerOperation.swift */; };
+		1AC8FF3A225FDA4000DD3902 /* TensoZoomCompletionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC8FF39225FDA4000DD3902 /* TensoZoomCompletionDelegate.swift */; };
 		1ADA9820223997A900F84878 /* FeatureRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADA981F223997A900F84878 /* FeatureRepository.swift */; };
+		DAAD6FF6263F2002C693640A /* Pods_Tenso_MessagesExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 066130F99C1EAA73504E11B7 /* Pods_Tenso_MessagesExtension.framework */; };
+		DAE8C03ADB98BCC6FDF159C1 /* Pods_Tenso.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0495F652D3B18FBF0CDD434 /* Pods_Tenso.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +56,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		012FEB930E5D7C24AC778A20 /* Pods-Tenso.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tenso.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tenso/Pods-Tenso.debug.xcconfig"; sourceTree = "<group>"; };
+		066130F99C1EAA73504E11B7 /* Pods_Tenso_MessagesExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tenso_MessagesExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A03A52C2230852A0076647C /* Tenso.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tenso.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A03A52F2230852B0076647C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A03A5312230852B0076647C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -68,9 +75,16 @@
 		1A3ED7B62235A69400632412 /* TensoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TensoRepository.swift; sourceTree = "<group>"; };
 		1A3ED7B92235C93E00632412 /* AutoModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoModeViewController.swift; sourceTree = "<group>"; };
 		1A3ED7BB2235C94E00632412 /* FacesModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacesModeViewController.swift; sourceTree = "<group>"; };
+		1A7C7BE6225D369300DD7EC8 /* CreateTensoZoomOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTensoZoomOperation.swift; sourceTree = "<group>"; };
 		1A9B8E342236EDF10099B159 /* TensoStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TensoStack.swift; sourceTree = "<group>"; };
 		1AB7BBCC22497E1D0065A092 /* MessagesViewController+MessagesAppConversationDeletgate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessagesViewController+MessagesAppConversationDeletgate.swift"; sourceTree = "<group>"; };
+		1AC8FF37225FD72500DD3902 /* PerformCompletionHandlerOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformCompletionHandlerOperation.swift; sourceTree = "<group>"; };
+		1AC8FF39225FDA4000DD3902 /* TensoZoomCompletionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TensoZoomCompletionDelegate.swift; sourceTree = "<group>"; };
 		1ADA981F223997A900F84878 /* FeatureRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureRepository.swift; sourceTree = "<group>"; };
+		96EA0D4116E11E3401FF211A /* Pods-Tenso MessagesExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tenso MessagesExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tenso MessagesExtension/Pods-Tenso MessagesExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		DEA5A107471EDF36DB1214F7 /* Pods-Tenso.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tenso.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tenso/Pods-Tenso.release.xcconfig"; sourceTree = "<group>"; };
+		F0495F652D3B18FBF0CDD434 /* Pods_Tenso.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tenso.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F6BFEECF224F531AE91F8E17 /* Pods-Tenso MessagesExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tenso MessagesExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tenso MessagesExtension/Pods-Tenso MessagesExtension.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +93,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A03A53C2230852B0076647C /* Messages.framework in Frameworks */,
+				DAAD6FF6263F2002C693640A /* Pods_Tenso_MessagesExtension.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BD2808617D578F2AA0939EF2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DAE8C03ADB98BCC6FDF159C1 /* Pods_Tenso.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,6 +115,7 @@
 				1A03A53D2230852B0076647C /* Tenso MessagesExtension */,
 				1A03A53A2230852B0076647C /* Frameworks */,
 				1A03A52D2230852A0076647C /* Products */,
+				899F365163ABE80FE7403FAC /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -117,6 +141,8 @@
 			isa = PBXGroup;
 			children = (
 				1A03A53B2230852B0076647C /* Messages.framework */,
+				F0495F652D3B18FBF0CDD434 /* Pods_Tenso.framework */,
+				066130F99C1EAA73504E11B7 /* Pods_Tenso_MessagesExtension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -124,6 +150,7 @@
 		1A03A53D2230852B0076647C /* Tenso MessagesExtension */ = {
 			isa = PBXGroup;
 			children = (
+				1A7C7BE5225D366D00DD7EC8 /* Operations */,
 				1ADA981B2239958100F84878 /* Protocols */,
 				1A9B8E332236EDE00099B159 /* Models */,
 				1A03A556223095740076647C /* Repositories */,
@@ -167,6 +194,15 @@
 			path = TensoModes;
 			sourceTree = "<group>";
 		};
+		1A7C7BE5225D366D00DD7EC8 /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				1A7C7BE6225D369300DD7EC8 /* CreateTensoZoomOperation.swift */,
+				1AC8FF37225FD72500DD3902 /* PerformCompletionHandlerOperation.swift */,
+			);
+			path = Operations;
+			sourceTree = "<group>";
+		};
 		1A9B8E332236EDE00099B159 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				1A2FCF042242EC6C0010AE80 /* MessagesConversationDeletgate.swift */,
+				1AC8FF39225FDA4000DD3902 /* TensoZoomCompletionDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -199,6 +236,17 @@
 			path = ViewCells;
 			sourceTree = "<group>";
 		};
+		899F365163ABE80FE7403FAC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				012FEB930E5D7C24AC778A20 /* Pods-Tenso.debug.xcconfig */,
+				DEA5A107471EDF36DB1214F7 /* Pods-Tenso.release.xcconfig */,
+				96EA0D4116E11E3401FF211A /* Pods-Tenso MessagesExtension.debug.xcconfig */,
+				F6BFEECF224F531AE91F8E17 /* Pods-Tenso MessagesExtension.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -206,8 +254,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1A03A54C2230852C0076647C /* Build configuration list for PBXNativeTarget "Tenso" */;
 			buildPhases = (
+				399D03F23AC995E2DEA42EED /* [CP] Check Pods Manifest.lock */,
 				1A03A52A2230852A0076647C /* Resources */,
 				1A03A54B2230852C0076647C /* Embed App Extensions */,
+				BD2808617D578F2AA0939EF2 /* Frameworks */,
+				FA2B3354B1B9ACCF9354224D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -223,6 +274,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1A03A5482230852C0076647C /* Build configuration list for PBXNativeTarget "Tenso MessagesExtension" */;
 			buildPhases = (
+				0523C675F412CD1ACE5F174E /* [CP] Check Pods Manifest.lock */,
 				1A03A5322230852B0076647C /* Sources */,
 				1A03A5332230852B0076647C /* Frameworks */,
 				1A03A5342230852B0076647C /* Resources */,
@@ -293,17 +345,79 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0523C675F412CD1ACE5F174E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Tenso MessagesExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		399D03F23AC995E2DEA42EED /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Tenso-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FA2B3354B1B9ACCF9354224D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Tenso/Pods-Tenso-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/PeakOperation/PeakOperation.framework",
+				"${BUILT_PRODUCTS_DIR}/PeakResult/PeakResult.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PeakOperation.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PeakResult.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tenso/Pods-Tenso-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1A03A5322230852B0076647C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AC8FF38225FD72500DD3902 /* PerformCompletionHandlerOperation.swift in Sources */,
 				1AB7BBCD22497E1D0065A092 /* MessagesViewController+MessagesAppConversationDeletgate.swift in Sources */,
 				1A3ED7B522343B0400632412 /* TensoModeViewController.swift in Sources */,
+				1AC8FF3A225FDA4000DD3902 /* TensoZoomCompletionDelegate.swift in Sources */,
 				1A03A55022308AC90076647C /* PhotoRepository.swift in Sources */,
 				1A03A5552230938F0076647C /* RecentPhotoCell.swift in Sources */,
 				1A2FCF052242EC6C0010AE80 /* MessagesConversationDeletgate.swift in Sources */,
 				1A3ED7BA2235C93E00632412 /* AutoModeViewController.swift in Sources */,
+				1A7C7BE7225D369300DD7EC8 /* CreateTensoZoomOperation.swift in Sources */,
 				1A3ED7B72235A69400632412 /* TensoRepository.swift in Sources */,
 				1A03A553223090A90076647C /* RecentPhotosViewController.swift in Sources */,
 				1A3ED7BC2235C94E00632412 /* FacesModeViewController.swift in Sources */,
@@ -453,6 +567,7 @@
 		};
 		1A03A5492230852C0076647C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96EA0D4116E11E3401FF211A /* Pods-Tenso MessagesExtension.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
 				CODE_SIGN_STYLE = Automatic;
@@ -473,6 +588,7 @@
 		};
 		1A03A54A2230852C0076647C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F6BFEECF224F531AE91F8E17 /* Pods-Tenso MessagesExtension.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
 				CODE_SIGN_STYLE = Automatic;
@@ -493,6 +609,7 @@
 		};
 		1A03A54D2230852C0076647C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 012FEB930E5D7C24AC778A20 /* Pods-Tenso.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -508,6 +625,7 @@
 		};
 		1A03A54E2230852C0076647C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DEA5A107471EDF36DB1214F7 /* Pods-Tenso.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

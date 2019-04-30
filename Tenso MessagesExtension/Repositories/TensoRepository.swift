@@ -7,9 +7,12 @@ import simd
 
 import AVFoundation
 
+import PeakOperation
+
 class TensoRepository  {
     
     static let shared = TensoRepository()
+    let targetSize = CGSize(width: 300, height: 145)
     
     func renderTenso(for stack: TensoStack, on complete : @escaping (_ stack : TensoStack) -> Void) {
         
@@ -22,64 +25,48 @@ class TensoRepository  {
             if let x1 = image {
                 
                 let x1Rect = CGRect(origin: CGPoint.zero, size: x1.size)
-                
-                let targetSize = CGSize(width: 300, height: 145)
-                
-                let aspectRect = AVMakeRect(aspectRatio: targetSize, insideRect: x1Rect)
-                
-                
+                let aspectRect = AVMakeRect(aspectRatio: self.targetSize, insideRect: x1Rect)
+            
                 if let firstFace = FeatureRepository.shared.detectFaces(in: x1)?.first {
-               
                     
+                    let aspectFace = AVMakeRect(aspectRatio: self.targetSize, insideRect: firstFace)
                     
+                    newStack.size = x1.size
+                    newStack.zooms = self.interpolate(start: aspectRect, finish: aspectFace)
                     
-                    let aspectFace = AVMakeRect(aspectRatio: targetSize, insideRect: firstFace)
+                    let firstZoom = CreateTensoZoomOperation(at: 9)
                     
-                    let zooms = self.interpolate(start: aspectRect, finish: aspectFace)
+                    firstZoom.currentStack = newStack
                     
+                    let secondZoom = CreateTensoZoomOperation(at: 4)
                     
-                    self.append(x1, cropped: aspectRect, to: &newStack, focusRect: firstFace)
+                    secondZoom.currentStack = newStack
                     
+                    let thirdZoom = CreateTensoZoomOperation(at: 1)
                     
-                    if let midwayZoom = Array(zooms.suffix(4)).first {
+                    thirdZoom.currentStack = newStack
+                    
+                    let render = PerformCompletionHandlerOperation(on: {
                         
-                        let cropRect = midwayZoom
-                            .applying(CGAffineTransform(translationX: 0, y: -(midwayZoom.height / 3)))
-                            .applying(CGAffineTransform(scaleX: 1.0/CGFloat(x1.size.width), y: 1.0/CGFloat(x1.size.height)))
+                        DispatchQueue.main.sync {
+                            
+                            newStack.stackComplete = true
+                            
+                             print(newStack.stack)
+                            
+                            complete(newStack)
+                        }
                         
-                        PhotoRepository.shared.fetchCroppedPhoto(for: newStack.asset, at: targetSize, cropped: cropRect, completion: { image in
-                            
-                            if let x2 = image {
-                                
-                                self.append(x2, cropped: nil, to: &newStack, focusRect: firstFace)
-                                
-
-                            if let penultimateZoom = Array(zooms.suffix(1)).first {
-                                
-                                let cropRect = penultimateZoom
-                                    .applying(CGAffineTransform(translationX: 0, y: -(midwayZoom.height / 6)))
-                                        .applying(CGAffineTransform(scaleX: 1.0/CGFloat(x1.size.width), y: 1.0/CGFloat(x1.size.height)))
-                                
-                                PhotoRepository.shared.fetchCroppedPhoto(for: newStack.asset, at: targetSize, cropped: cropRect, completion: { image in
-                                    
-                                    if let x3 = image {
-                                        self.append(x3, cropped: nil, to: &newStack, focusRect: firstFace)
-                                        
-                                    }
-                                    
-                                })
-                                
-                            }
-                                
-                            }
-                            
-                            
-                        })
-                        
-                    }
+                    })
                     
+                    let queue = OperationQueue()
                     
-                
+                    firstZoom
+                        .then(do: secondZoom)
+                        .then(do: thirdZoom)
+                        .then(do: render)
+                        .enqueue(on: queue)
+                    
 
                 } else {
                     
@@ -264,4 +251,22 @@ class TensoRepository  {
         
     }
     
+}
+
+extension TensoRepository : TensoZoomCompletionDelegate {
+    
+    func append(zoom: UIImage, onCompletion complete: @escaping EmptyVoidClosure) {
+        
+        
+            DispatchQueue.main.sync {
+                
+                
+                //newStack.stackComplete = true
+                
+                //print(newStack.stack)
+                
+                //complete(newStack)
+            }
+        
+    }
 }
