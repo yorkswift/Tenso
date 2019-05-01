@@ -3,41 +3,43 @@ import UIKit
 
 class AutoModeViewController: UIViewController {
     
-    @IBOutlet weak var TensoStackView: UIStackView!
+    private var state: State?
     
-    var tensoRepository : TensoRepository?
+    enum State {
+        case loading
+        case failed(Error)
+        case render(UIViewController)
+    }
+    
+    @IBOutlet weak var Container: UIView!
+    private var activeViewController: UIViewController?
     
     override func viewDidLoad() {
         
+        super.viewDidLoad()
+        
+        if state == nil {
+            transition(to: .loading)
+        }
+        
         if let modeController = self.tabBarController as? TensoModeViewController {
             
-            modeController.renderTenso(for: .Auto) { stack in
-                
-                var v = 0
-                
-                for subView in self.TensoStackView.subviews {
-                
-                    if let imageView = subView as? UIImageView {
-                        
-                        if(stack.stack.indices.contains(v)){
-                        
-                            if let image = stack.stack[v] {
-                                
-                                imageView.image = image
-                                 v += 1
-                                
-                            }
-                            
-                            
-                        }
-                     
-                    }
-                
-                }
-            }
+            print(modeController)
+            
         }
         
     }
+    
+    func transition(to newState: State) {
+        
+        activeViewController?.remove()
+        let vc = viewController(for: newState)
+        add(vc)
+        activeViewController = vc
+        state = newState
+        
+    }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         

@@ -88,30 +88,20 @@ class TensoModeViewController : UITabBarController {
     @objc func sendTensoAction(){
         
        
-        if let stack = completedStack {
-           
-//            TensoRepository.shared.flatten(stack: stack, onComplete: { image in
+//        if let stack = completedStack {
+//           
+//            if let modeView = self.selectedViewController as? AutoModeViewController {
+//                if let image = renderImage(from: modeView.TensoStackView) {
 //
-//                  print("completed image render")
+//                    self.messagesDelegate?.send(photo: image, onCompletion: {
+//                        print("sent")
+//                    })
 //
-//                self.messagesDelegate?.send(photo: image, onCompletion: {
-//                    print("sent")
-//                })
-//
-//            })
-            
-            if let modeView = self.selectedViewController as? AutoModeViewController {
-                if let image = renderImage(from: modeView.TensoStackView) {
-
-                    self.messagesDelegate?.send(photo: image, onCompletion: {
-                        print("sent")
-                    })
-
-                }
-            
-            }
-            
-        }
+//                }
+//            
+//            }
+//            
+//        }
 
     }
     

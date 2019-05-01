@@ -27,6 +27,8 @@
 		1AC8FF38225FD72500DD3902 /* PerformCompletionHandlerOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC8FF37225FD72500DD3902 /* PerformCompletionHandlerOperation.swift */; };
 		1AC8FF3A225FDA4000DD3902 /* TensoZoomCompletionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC8FF39225FDA4000DD3902 /* TensoZoomCompletionDelegate.swift */; };
 		1ADA9820223997A900F84878 /* FeatureRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADA981F223997A900F84878 /* FeatureRepository.swift */; };
+		1AFDA45D2278E26F0047F066 /* TensoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFDA45C2278E26F0047F066 /* TensoViewController.swift */; };
+		1AFDA45F2278E7960047F066 /* DetectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFDA45E2278E7960047F066 /* DetectionViewController.swift */; };
 		DAAD6FF6263F2002C693640A /* Pods_Tenso_MessagesExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 066130F99C1EAA73504E11B7 /* Pods_Tenso_MessagesExtension.framework */; };
 		DAE8C03ADB98BCC6FDF159C1 /* Pods_Tenso.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0495F652D3B18FBF0CDD434 /* Pods_Tenso.framework */; };
 /* End PBXBuildFile section */
@@ -81,6 +83,8 @@
 		1AC8FF37225FD72500DD3902 /* PerformCompletionHandlerOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformCompletionHandlerOperation.swift; sourceTree = "<group>"; };
 		1AC8FF39225FDA4000DD3902 /* TensoZoomCompletionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TensoZoomCompletionDelegate.swift; sourceTree = "<group>"; };
 		1ADA981F223997A900F84878 /* FeatureRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureRepository.swift; sourceTree = "<group>"; };
+		1AFDA45C2278E26F0047F066 /* TensoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TensoViewController.swift; sourceTree = "<group>"; };
+		1AFDA45E2278E7960047F066 /* DetectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectionViewController.swift; sourceTree = "<group>"; };
 		96EA0D4116E11E3401FF211A /* Pods-Tenso MessagesExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tenso MessagesExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tenso MessagesExtension/Pods-Tenso MessagesExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		DEA5A107471EDF36DB1214F7 /* Pods-Tenso.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tenso.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tenso/Pods-Tenso.release.xcconfig"; sourceTree = "<group>"; };
 		F0495F652D3B18FBF0CDD434 /* Pods_Tenso.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tenso.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,6 +175,8 @@
 				1A3ED7B422343B0400632412 /* TensoModeViewController.swift */,
 				1A03A552223090A90076647C /* RecentPhotosViewController.swift */,
 				1A03A53E2230852B0076647C /* MessagesViewController.swift */,
+				1AFDA45C2278E26F0047F066 /* TensoViewController.swift */,
+				1AFDA45E2278E7960047F066 /* DetectionViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -415,12 +421,14 @@
 				1AC8FF3A225FDA4000DD3902 /* TensoZoomCompletionDelegate.swift in Sources */,
 				1A03A55022308AC90076647C /* PhotoRepository.swift in Sources */,
 				1A03A5552230938F0076647C /* RecentPhotoCell.swift in Sources */,
+				1AFDA45F2278E7960047F066 /* DetectionViewController.swift in Sources */,
 				1A2FCF052242EC6C0010AE80 /* MessagesConversationDeletgate.swift in Sources */,
 				1A3ED7BA2235C93E00632412 /* AutoModeViewController.swift in Sources */,
 				1A7C7BE7225D369300DD7EC8 /* CreateTensoZoomOperation.swift in Sources */,
 				1A3ED7B72235A69400632412 /* TensoRepository.swift in Sources */,
 				1A03A553223090A90076647C /* RecentPhotosViewController.swift in Sources */,
 				1A3ED7BC2235C94E00632412 /* FacesModeViewController.swift in Sources */,
+				1AFDA45D2278E26F0047F066 /* TensoViewController.swift in Sources */,
 				1ADA9820223997A900F84878 /* FeatureRepository.swift in Sources */,
 				1A9B8E352236EDF10099B159 /* TensoStack.swift in Sources */,
 				1A03A53F2230852B0076647C /* MessagesViewController.swift in Sources */,
