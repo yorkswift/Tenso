@@ -133,11 +133,11 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="v2K-mh-vLK">
                                 <rect key="frame" x="30" y="115" width="315" height="457"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="p23-aw-lMh">
-                                        <rect key="frame" x="0.0" y="0.0" width="315" height="238.5"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" image="FacesSelected" translatesAutoresizingMaskIntoConstraints="NO" id="p23-aw-lMh">
+                                        <rect key="frame" x="0.0" y="0.0" width="315" height="434.5"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detecting Features" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Apk-Mg-e3x">
-                                        <rect key="frame" x="0.0" y="238.5" width="315" height="216.5"/>
+                                        <rect key="frame" x="0.0" y="434.5" width="315" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -176,27 +176,10 @@
                     <view key="view" contentMode="scaleToFill" id="SI4-w9-TI0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j6U-xK-oM5">
-                                <rect key="frame" x="0.0" y="20" width="375" height="667"/>
-                                <connections>
-                                    <segue destination="QJT-rO-V9U" kind="embed" id="LWw-9s-tpg"/>
-                                </connections>
-                            </containerView>
-                        </subviews>
                         <color key="backgroundColor" white="0.10000000000000001" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="j6U-xK-oM5" firstAttribute="top" secondItem="09C-tB-3aU" secondAttribute="top" id="3iX-6k-5XW"/>
-                            <constraint firstItem="j6U-xK-oM5" firstAttribute="trailing" secondItem="09C-tB-3aU" secondAttribute="trailing" id="U5s-Vp-nUa"/>
-                            <constraint firstItem="j6U-xK-oM5" firstAttribute="height" secondItem="SI4-w9-TI0" secondAttribute="height" id="fpm-sL-qZ3"/>
-                            <constraint firstItem="j6U-xK-oM5" firstAttribute="leading" secondItem="09C-tB-3aU" secondAttribute="leading" id="lLZ-2G-jRA"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="09C-tB-3aU"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="AUTO" image="AutoNormal" id="n7S-fd-ZU9"/>
-                    <connections>
-                        <outlet property="Container" destination="j6U-xK-oM5" id="DsZ-ug-c7f"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t3Q-Va-0W1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -205,7 +188,7 @@
         <!--Tenso View Controller-->
         <scene sceneID="eHL-Di-GlD">
             <objects>
-                <viewController storyboardIdentifier="TensoViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Gg3-w9-wVv" customClass="TensoViewController" customModule="Tenso_MessagesExtension" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DefaultTensoViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Gg3-w9-wVv" customClass="TensoViewController" customModule="Tenso_MessagesExtension" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MP8-Lg-AEE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -290,6 +273,7 @@
     <resources>
         <image name="AutoNormal" width="22" height="22"/>
         <image name="FacesNormal" width="22" height="22"/>
+        <image name="FacesSelected" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="xzs-gN-zff"/>

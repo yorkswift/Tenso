@@ -42,6 +42,8 @@ class TensoModeViewController : UITabBarController {
         switch(mode){
         case .Auto:
             
+            print("start auto")
+            
             let tenso = TensoStack(for: asset, targetSize: CGSize(width: 300, height: 145))
             
             TensoRepository.shared.renderTenso(for: tenso, on: { newStack in
