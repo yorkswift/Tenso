@@ -17,6 +17,7 @@
 		1A03A553223090A90076647C /* RecentPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A03A552223090A90076647C /* RecentPhotosViewController.swift */; };
 		1A03A5552230938F0076647C /* RecentPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A03A5542230938F0076647C /* RecentPhotoCell.swift */; };
 		1A1FC3AE227A387200FCF2C1 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1FC3AD227A387200FCF2C1 /* UIViewController.swift */; };
+		1A1FC3B0227A44E000FCF2C1 /* StoryboardRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1FC3AF227A44E000FCF2C1 /* StoryboardRepository.swift */; };
 		1A2FCF052242EC6C0010AE80 /* MessagesConversationDeletgate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2FCF042242EC6C0010AE80 /* MessagesConversationDeletgate.swift */; };
 		1A3ED7B522343B0400632412 /* TensoModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3ED7B422343B0400632412 /* TensoModeViewController.swift */; };
 		1A3ED7B72235A69400632412 /* TensoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3ED7B62235A69400632412 /* TensoRepository.swift */; };
@@ -74,6 +75,7 @@
 		1A03A552223090A90076647C /* RecentPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentPhotosViewController.swift; sourceTree = "<group>"; };
 		1A03A5542230938F0076647C /* RecentPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentPhotoCell.swift; sourceTree = "<group>"; };
 		1A1FC3AD227A387200FCF2C1 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		1A1FC3AF227A44E000FCF2C1 /* StoryboardRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardRepository.swift; sourceTree = "<group>"; };
 		1A2FCF042242EC6C0010AE80 /* MessagesConversationDeletgate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesConversationDeletgate.swift; sourceTree = "<group>"; };
 		1A3ED7B422343B0400632412 /* TensoModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TensoModeViewController.swift; sourceTree = "<group>"; };
 		1A3ED7B62235A69400632412 /* TensoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TensoRepository.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				1A03A54F22308AC90076647C /* PhotoRepository.swift */,
 				1A3ED7B62235A69400632412 /* TensoRepository.swift */,
 				1ADA981F223997A900F84878 /* FeatureRepository.swift */,
+				1A1FC3AF227A44E000FCF2C1 /* StoryboardRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 				1AFDA45F2278E7960047F066 /* DetectionViewController.swift in Sources */,
 				1A2FCF052242EC6C0010AE80 /* MessagesConversationDeletgate.swift in Sources */,
 				1A3ED7BA2235C93E00632412 /* AutoModeViewController.swift in Sources */,
+				1A1FC3B0227A44E000FCF2C1 /* StoryboardRepository.swift in Sources */,
 				1A7C7BE7225D369300DD7EC8 /* CreateTensoZoomOperation.swift in Sources */,
 				1A3ED7B72235A69400632412 /* TensoRepository.swift in Sources */,
 				1A03A553223090A90076647C /* RecentPhotosViewController.swift in Sources */,

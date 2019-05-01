@@ -6,19 +6,18 @@ import PeakOperation
 class CreateTensoZoomOperation: ConcurrentOperation {
     
     let targetLevel : Int
-    var currentStack : TensoStack?
+    let stackIndex : Int
     let targetSize = CGSize(width: 300, height: 145)
     
-    init(at level: Int) {
+    init(at level: Int, for index : Int) {
         targetLevel = level
+        stackIndex = index
     }
     
     override func execute() {
         
-        print("Zoom Level \(targetLevel)")
-        
-        if var currentStack = currentStack {
-        
+        if let currentStack = TensoRepository.shared.stack(for: stackIndex) {
+            
         if let zoomRect = Array(currentStack.zooms.suffix(targetLevel)).first {
             
             let cropRect = zoomRect
@@ -29,11 +28,7 @@ class CreateTensoZoomOperation: ConcurrentOperation {
                 
                     if let zoomImage = image {
                         
-                        currentStack.stack.append(zoomImage)
-                        
-                        print(currentStack.stack)
-                        
-                        
+                        TensoRepository.shared.add(zoom: zoomImage, for: self.stackIndex)
                         self.finish()
                         //self.append(x2, cropped: nil, to: &newStack, focusRect: firstFace)
                         
@@ -43,6 +38,8 @@ class CreateTensoZoomOperation: ConcurrentOperation {
                 
         }
             
+        } else {
+            print("could not get current stack")
         }
         
        // finish()

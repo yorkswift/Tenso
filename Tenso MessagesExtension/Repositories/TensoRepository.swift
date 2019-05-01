@@ -14,6 +14,27 @@ class TensoRepository  {
     static let shared = TensoRepository()
     let targetSize = CGSize(width: 300, height: 145)
     
+    var tensos = [TensoStack]()
+    
+    func stack(for index: Int) -> TensoStack? {
+        
+        if tensos.indices.contains(index){
+            return tensos[index]
+        }
+        return nil
+        
+    }
+    
+    func add(zoom : UIImage, for index: Int){
+        
+        if tensos.indices.contains(index){
+            tensos[index].stack.append(zoom)
+            
+            print(tensos[index].stack)
+        }
+        
+    }
+    
     func renderTenso(for stack: TensoStack, on complete : @escaping (_ stack : TensoStack) -> Void) {
         
         DispatchQueue.global(qos: .userInitiated).async {
@@ -34,27 +55,23 @@ class TensoRepository  {
                     newStack.size = x1.size
                     newStack.zooms = self.interpolate(start: aspectRect, finish: aspectFace)
                     
-                    let firstZoom = CreateTensoZoomOperation(at: 9)
+                    self.tensos.append(newStack)
+                    let index = self.tensos.endIndex - 1
                     
-                    firstZoom.currentStack = newStack
-                    
-                    let secondZoom = CreateTensoZoomOperation(at: 4)
-                    
-                    secondZoom.currentStack = newStack
-                    
-                    let thirdZoom = CreateTensoZoomOperation(at: 1)
-                    
-                    thirdZoom.currentStack = newStack
+                    let firstZoom = CreateTensoZoomOperation(at: 9, for: index)
+                    let secondZoom = CreateTensoZoomOperation(at: 4, for: index)
+                    let thirdZoom = CreateTensoZoomOperation(at: 1, for: index)
                     
                     let render = PerformCompletionHandlerOperation(on: {
                         
                         DispatchQueue.main.sync {
                             
-                            newStack.stackComplete = true
-                            
-                             print(newStack.stack)
-                            
-                            complete(newStack)
+                            if var tenso = self.stack(for: index){
+                                
+                                tenso.stackComplete = true
+                                
+                                complete(tenso)
+                            }
                         }
                         
                     })

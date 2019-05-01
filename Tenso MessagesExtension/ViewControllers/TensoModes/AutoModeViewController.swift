@@ -5,12 +5,6 @@ class AutoModeViewController: UIViewController {
     
     private var state: State?
     
-    enum StoryboardIdentifiers : String {
-        case MainInterface
-        case DetectionViewController
-        case DefaultTensoViewController
-    }
-    
     enum State {
         case loading
        // case failed(Error)
@@ -31,13 +25,10 @@ class AutoModeViewController: UIViewController {
 
             modeController.renderTenso(for: .Auto) { stack in
                 
-                 let storyboard = UIStoryboard(name: StoryboardIdentifiers.MainInterface.rawValue, bundle: nil)
-                
-                let vc = storyboard.instantiateViewController(withIdentifier: StoryboardIdentifiers.DefaultTensoViewController.rawValue) as! TensoViewController
+                let vc = StoryboardRepository.shared.new(withIdentifier:.DefaultTensoViewController) as! TensoViewController
                 
                 vc.stack = stack
-                
-                 self.transition(to: .render(vc))
+                self.transition(to: .render(vc))
                 
             }
     
@@ -59,12 +50,10 @@ class AutoModeViewController: UIViewController {
     
     func viewController(for state: State) -> UIViewController {
         
-        let storyboard = UIStoryboard(name: StoryboardIdentifiers.MainInterface.rawValue, bundle: nil)
-        
         switch state {
         case .loading:
             
-            return storyboard.instantiateViewController(withIdentifier: StoryboardIdentifiers.DetectionViewController.rawValue) as! DetectionViewController
+            return StoryboardRepository.shared.new(withIdentifier:.DetectionViewController) as! DetectionViewController
             
       //  case .failed(let error):
     //    return ErrorViewController(error: error)

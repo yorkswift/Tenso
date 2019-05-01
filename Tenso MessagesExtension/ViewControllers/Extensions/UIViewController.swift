@@ -5,9 +5,13 @@ import UIKit
 
 extension UIViewController {
     func add(_ child: UIViewController) {
+        
         addChild(child)
-        view.addSubview(child.view)
-        child.didMove(toParent: self)
+        UIView.transition(with: self.view, duration: 0.25, options: [.transitionCrossDissolve], animations: {
+            self.view.addSubview(child.view)
+             child.didMove(toParent: self)
+        }, completion: nil)
+        
     }
     
     func remove() {
@@ -16,7 +20,10 @@ extension UIViewController {
         }
         
         willMove(toParent: nil)
-        view.removeFromSuperview()
-        removeFromParent()
+        UIView.transition(with: view, duration: 0.25, options: [.transitionCrossDissolve], animations: {
+            self.view.removeFromSuperview()
+            self.removeFromParent()
+        }, completion: nil)
+        
     }
 }
