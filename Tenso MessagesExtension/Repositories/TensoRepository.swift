@@ -33,7 +33,7 @@ class TensoRepository  {
         
     }
     
-    func renderTenso(for stack: TensoStack, on complete : @escaping (_ stack : TensoStack) -> Void) {
+    func renderTenso(for stack: TensoStack, onBegun began: @escaping (_ img : UIImage) -> Void, onComplete completed : @escaping (_ stack : TensoStack) -> Void) {
         
         DispatchQueue.global(qos: .userInitiated).async {
             
@@ -42,6 +42,10 @@ class TensoRepository  {
             PhotoRepository.shared.fetchPhoto(for: newStack.asset, at: newStack.size, completion: { image in
             
             if let x1 = image {
+                
+                DispatchQueue.main.sync {
+                    began(x1)
+                }
                 
                 let x1Rect = CGRect(origin: CGPoint.zero, size: x1.size)
                 let aspectRect = AVMakeRect(aspectRatio: self.targetSize, insideRect: x1Rect)
@@ -68,7 +72,7 @@ class TensoRepository  {
                                 
                                 tenso.stackComplete = true
                                 
-                                complete(tenso)
+                                completed(tenso)
                             }
                         }
                         
@@ -90,7 +94,7 @@ class TensoRepository  {
                     newStack.stack.append(x1)
                     
                     DispatchQueue.main.sync {
-                        complete(newStack)
+                        completed(newStack)
                     }
                     
                     let focusPoint : CGFloat = 20
@@ -139,7 +143,7 @@ class TensoRepository  {
             newStack.stackComplete = true
             
             DispatchQueue.main.sync {
-                complete(newStack)
+                completed(newStack)
             }
     
         

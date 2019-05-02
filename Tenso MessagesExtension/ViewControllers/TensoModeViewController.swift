@@ -26,11 +26,11 @@ class TensoModeViewController : UITabBarController {
         
     }
     
-    func renderTenso(for mode: TensoMode, on complete : @escaping (_ stack : TensoStack) -> Void) {
+    func renderTenso(for mode: TensoMode, onBegun began: @escaping (_ img: UIImage) -> Void, onComplete completed : @escaping (_ stack : TensoStack) -> Void) {
         
         guard let photoIndex = selectedPhotoIndex else {
             
-             print("no index")
+            print("no index")
             return
         }
         
@@ -44,9 +44,14 @@ class TensoModeViewController : UITabBarController {
             
             let tenso = TensoStack(for: asset, targetSize: CGSize(width: 300, height: 145))
             
-            TensoRepository.shared.renderTenso(for: tenso, on: { newStack in
+            TensoRepository.shared.renderTenso(for: tenso,
+                onBegun: { img in
+                    began(img)
+                },
+                onComplete:
+                { newStack in
                 
-                complete(newStack)
+                completed(newStack)
                 
                 if(newStack.stackComplete){
                 

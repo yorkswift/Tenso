@@ -6,7 +6,7 @@ class AutoModeViewController: UIViewController {
     private var state: State?
     
     enum State {
-        case loading
+        case loading(DetectionViewController)
        // case failed(Error)
         case render(UIViewController)
     }
@@ -17,20 +17,24 @@ class AutoModeViewController: UIViewController {
         
         super.viewDidLoad()
         
-        if state == nil {
-            transition(to: .loading)
-        }
-        
-        if let modeController = self.tabBarController as? TensoModeViewController {
+        let loadingViewController = StoryboardRepository.shared.new(withIdentifier:.DetectionViewController) as! DetectionViewController
 
-            modeController.renderTenso(for: .Auto) { stack in
+        if let modeController = self.tabBarController as? TensoModeViewController {
+            
+            modeController.renderTenso(for: .Auto,
+            onBegun: { img in
+                
+                loadingViewController.loadingImage = img
+ 
+                self.transition(to: .loading(loadingViewController))
+            },
+            onComplete: { stack in
                 
                 let vc = StoryboardRepository.shared.new(withIdentifier:.DefaultTensoViewController) as! TensoViewController
-                
                 vc.stack = stack
                 self.transition(to: .render(vc))
                 
-            }
+            })
     
         }
     
@@ -38,10 +42,21 @@ class AutoModeViewController: UIViewController {
     
     func transition(to newState: State) {
         
-        activeViewController?.remove()
-       
         let vc = viewController(for: newState)
-        add(vc)
+        if let active = activeViewController {
+            
+//            let segue = UIStoryboardSegue(identifier: "ShowCompletedTenso", source: active, destination: vc)
+//            prepare(for: segue, sender: nil)
+//            segue.perform()
+            
+            active.remove()
+            self.add(vc)
+            
+        } else {
+            
+             self.add(vc)
+            
+        }
         
         activeViewController = vc
         state = newState
@@ -51,9 +66,8 @@ class AutoModeViewController: UIViewController {
     func viewController(for state: State) -> UIViewController {
         
         switch state {
-        case .loading:
-            
-            return StoryboardRepository.shared.new(withIdentifier:.DetectionViewController) as! DetectionViewController
+        case .loading(let viewController):
+            return viewController
             
       //  case .failed(let error):
     //    return ErrorViewController(error: error)
@@ -63,12 +77,7 @@ class AutoModeViewController: UIViewController {
         }
         
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
-        super.viewDidAppear(animated)
-        
-    }
+
 
 }
 
