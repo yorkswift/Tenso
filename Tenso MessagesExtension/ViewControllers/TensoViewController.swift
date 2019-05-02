@@ -17,8 +17,6 @@ class TensoViewController: UIViewController {
         
             if let imageView = subView as? UIImageView {
                 
-                print(v)
-                
                 if(stack.stack.indices.contains(v)){
                 
                     if let image = stack.stack[v] {

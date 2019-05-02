@@ -29,8 +29,6 @@ class TensoRepository  {
         
         if tensos.indices.contains(index){
             tensos[index].stack.append(zoom)
-            
-            print(tensos[index].stack)
         }
         
     }

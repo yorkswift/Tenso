@@ -12,9 +12,10 @@ class DetectionViewController: UIViewController {
         
         super.viewDidLoad()
         
-        print("I was added")
-        
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        Progress.setProgress(0.5, animated: true)
     }
     
 }
