@@ -8,10 +8,10 @@ extension UIViewController {
         
         addChild(child)
         
-        UIView.transition(with: self.view, duration: 0.5, options: [.transitionCrossDissolve], animations: {
+        //UIView.transition(with: self.view, duration: 0.5, options: [.transitionCrossDissolve], animations: {
             self.view.addSubview(child.view)
             child.didMove(toParent: self)
-        }, completion: nil)
+        //}, completion: nil)
         
     }
     
@@ -20,12 +20,12 @@ extension UIViewController {
             return
         }
         self.willMove(toParent: nil)
-        UIView.transition(with: view, duration: 0.5, options: [.transitionCrossDissolve], animations: {
+       // UIView.transition(with: view, duration: 0.5, options: [.transitionCrossDissolve], animations: {
            
             self.view.removeFromSuperview()
             self.removeFromParent()
             
-        }, completion: nil)
+       // }, completion: nil)
         
     }
     

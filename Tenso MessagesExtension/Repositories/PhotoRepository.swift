@@ -37,8 +37,11 @@ class PhotoRepository {
     }
     
     func fetchPhoto(for asset: PHAsset, at size: CGSize, completion block: @escaping (UIImage?)->()) {
-
-        imageManager.requestImage(for: asset, targetSize: size, contentMode: .aspectFit, options: requestOptions) { (image, _) in
+        
+        let retinaScale = UIScreen.main.scale * 0.5
+        let targetSize = CGSize(width: size.width * retinaScale, height: size.height * retinaScale)
+        
+        imageManager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFit, options: requestOptions) { (image, _) in
             block(image)
         }
        
@@ -46,7 +49,7 @@ class PhotoRepository {
     
     func fetchCroppedPhoto(for asset: PHAsset, at size: CGSize, cropped : CGRect, completion block: @escaping (UIImage?)->()) {
         
-        let retinaScale = UIScreen.main.scale * 5
+        let retinaScale = UIScreen.main.scale * 4
         let targetSize = CGSize(width: size.width * retinaScale, height: size.height * retinaScale)
         
         let cropOptions = PHImageRequestOptions()

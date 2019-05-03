@@ -30,9 +30,14 @@ class AutoModeViewController: UIViewController {
             },
             onComplete: { stack in
                 
-                let vc = StoryboardRepository.shared.new(withIdentifier:.DefaultTensoViewController) as! TensoViewController
-                vc.stack = stack
-                self.transition(to: .render(vc))
+                loadingViewController.finished(onComplete: {
+                    
+                    let vc = StoryboardRepository.shared.new(withIdentifier:.DefaultTensoViewController) as! TensoViewController
+                    vc.stack = stack
+                    self.transition(to: .render(vc))
+
+                })
+                
                 
             })
     
@@ -44,11 +49,7 @@ class AutoModeViewController: UIViewController {
         
         let vc = viewController(for: newState)
         if let active = activeViewController {
-            
-//            let segue = UIStoryboardSegue(identifier: "ShowCompletedTenso", source: active, destination: vc)
-//            prepare(for: segue, sender: nil)
-//            segue.perform()
-            
+                  
             active.remove()
             self.add(vc)
             
@@ -76,6 +77,15 @@ class AutoModeViewController: UIViewController {
             return viewController
         }
         
+    }
+    
+    func tensoStackView() -> UIStackView? {
+        
+        if let vc = activeViewController as? TensoViewController {
+            return vc.TensoStack
+        }
+        
+        return nil
     }
 
 

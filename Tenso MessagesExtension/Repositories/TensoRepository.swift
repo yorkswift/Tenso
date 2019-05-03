@@ -93,10 +93,6 @@ class TensoRepository  {
                     
                     newStack.stack.append(x1)
                     
-                    DispatchQueue.main.sync {
-                        completed(newStack)
-                    }
-                    
                     let focusPoint : CGFloat = 20
                 
                     
@@ -130,6 +126,12 @@ class TensoRepository  {
                         
                     }
                     
+                    newStack.stackComplete = true
+                    
+                    DispatchQueue.main.sync {
+                        completed(newStack)
+                    }
+                    
                     
                     
                 }
@@ -140,11 +142,7 @@ class TensoRepository  {
             }
             
             
-            newStack.stackComplete = true
-            
-            DispatchQueue.main.sync {
-                completed(newStack)
-            }
+           
     
         
         })
