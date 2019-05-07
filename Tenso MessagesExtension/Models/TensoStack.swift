@@ -15,6 +15,8 @@ struct TensoStack {
     var stackComplete = false
     var zooms = [CGRect]()
     
+    var detectedFaces = 0
+    
     var composite : UIImage?
     
     init(for photo: PHAsset, targetSize : CGSize){

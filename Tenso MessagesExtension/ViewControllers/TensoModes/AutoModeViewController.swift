@@ -3,91 +3,106 @@ import UIKit
 
 class AutoModeViewController: UIViewController {
     
-    private var state: State?
     
-    enum State {
-        case loading(DetectionViewController)
-       // case failed(Error)
-        case render(UIViewController)
+    @IBOutlet weak var tensoStackView: UIStackView!
+    @IBOutlet weak var loadingStackView: UIStackView!
+    
+    @IBOutlet weak var loadingImageView: UIImageView!
+    @IBOutlet weak var progressBar: UIProgressView!
+    
+    var loadingImage : UIImage?
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        progressBar.setProgress(0.4, animated: true)
+        
     }
-    
-    private var activeViewController: UIViewController?
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        let loadingViewController = StoryboardRepository.shared.new(withIdentifier:.DetectionViewController) as! DetectionViewController
-
+        beginRenderingTenso()
+        
+    }
+    
+    func beginRenderingTenso() -> Void {
+        
         if let modeController = self.tabBarController as? TensoModeViewController {
             
             modeController.renderTenso(for: .Auto,
-            onBegun: { img in
+           
+              onBegun: { img in
+                                        
+                self.loadingImage = img
                 
-                loadingViewController.loadingImage = img
- 
-                self.transition(to: .loading(loadingViewController))
-            },
-            onComplete: { stack in
-                
-                loadingViewController.finished(onComplete: {
+              },
+              onComplete: { stack in
+                                        
+                   self.hideLoadingView(onComplete: {
                     
-                    let vc = StoryboardRepository.shared.new(withIdentifier:.DefaultTensoViewController) as! TensoViewController
-                    vc.stack = stack
-                    self.transition(to: .render(vc))
-
-                })
-                
+                        self.mapImagesToViews(with: stack)
+                    
+                    })
                 
             })
-    
-        }
-    
-    }
-    
-    func transition(to newState: State) {
-        
-        let vc = viewController(for: newState)
-        if let active = activeViewController {
-                  
-            active.remove()
-            self.add(vc)
             
-        } else {
-            
-             self.add(vc)
-            
-        }
-        
-        activeViewController = vc
-        state = newState
-        
-    }
-    
-    func viewController(for state: State) -> UIViewController {
-        
-        switch state {
-        case .loading(let viewController):
-            return viewController
-            
-      //  case .failed(let error):
-    //    return ErrorViewController(error: error)
-            
-        case .render(let viewController):
-            return viewController
         }
         
     }
     
-    func tensoStackView() -> UIStackView? {
-        
-        if let vc = activeViewController as? TensoViewController {
-            return vc.TensoStack
-        }
-        
-        return nil
-    }
 
+    func hideLoadingView(onComplete completed: @escaping () -> Void ){
+        
+        CATransaction.begin()
+        CATransaction.setCompletionBlock({
+            UIView.transition(with: self.view, duration: 0.25, options: [.transitionCrossDissolve], animations: {
+                
+                self.loadingImageView.alpha = 0
+                
+                
+            }, completion: {
+                success in
+                self.loadingImageView.isHidden = true
+                completed()
+            })
+        })
+        self.progressBar.setProgress(1.0, animated: true)
+        CATransaction.commit()
+        
+    }
+    
+    func mapImagesToViews(with stack : TensoStack){
+        
+        tensoStackView.alpha = 0;
+        tensoStackView.isHidden = false
+        
+        var v = 0
+        for subView in self.tensoStackView.subviews {
+            
+            if let imageView = subView as? UIImageView {
+                
+                if(stack.stack.indices.contains(v)){
+                    
+                    if let image = stack.stack[v] {
+                        
+                        imageView.image = image
+                        imageView.sizeToFit()
+                        v += 1
+                        
+                    }
+                    
+                    
+                }
+                
+            }
+            
+        }
+        
+        UIView.transition(with: self.tensoStackView, duration: 0.25, options: [.transitionCrossDissolve], animations: {
+            self.tensoStackView.alpha = 1
+        })
+        
+    }
 
 }
-

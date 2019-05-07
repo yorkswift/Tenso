@@ -16,6 +16,7 @@ class PhotoRepository {
         imageManager = PHImageManager.default()
         requestOptions = PHImageRequestOptions()
         requestOptions.isSynchronous = true
+        requestOptions.isNetworkAccessAllowed = true
         fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key:"creationDate", ascending: false)]
     }
@@ -52,12 +53,16 @@ class PhotoRepository {
         let retinaScale = UIScreen.main.scale * 4
         let targetSize = CGSize(width: size.width * retinaScale, height: size.height * retinaScale)
         
+        //print(retinaScale, size, targetSize, cropped)
+        
         let cropOptions = PHImageRequestOptions()
         cropOptions.isSynchronous = true
         cropOptions.resizeMode = .exact
         cropOptions.normalizedCropRect = cropped
+        cropOptions.isNetworkAccessAllowed = true
             
             imageManager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFit, options: cropOptions) { (image, _) in
+                
                 block(image)
         }
         

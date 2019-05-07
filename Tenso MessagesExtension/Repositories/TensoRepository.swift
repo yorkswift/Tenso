@@ -33,7 +33,11 @@ class TensoRepository  {
         
     }
     
-    func renderTenso(for stack: TensoStack, onBegun began: @escaping (_ img : UIImage) -> Void, onComplete completed : @escaping (_ stack : TensoStack) -> Void) {
+    func renderTenso(for stack: TensoStack,
+                     onBegun began: @escaping (_ img : UIImage) -> Void,
+                     onDetection detected: @escaping (_ count : Int) -> Void,
+                     onProgress progress: @escaping(_ increment : Int) -> Void,
+                     onComplete completed : @escaping (_ stack : TensoStack) -> Void) {
         
         DispatchQueue.global(qos: .userInitiated).async {
             
@@ -50,12 +54,43 @@ class TensoRepository  {
                 let x1Rect = CGRect(origin: CGPoint.zero, size: x1.size)
                 let aspectRect = AVMakeRect(aspectRatio: self.targetSize, insideRect: x1Rect)
             
-                if let firstFace = FeatureRepository.shared.detectFaces(in: x1)?.first {
+                var finishRect : CGRect?
+                
+                if let faces = FeatureRepository.shared.detectFaces(in: x1) {
+                
+                    DispatchQueue.main.sync {
+                        detected(faces.count)
+                        progress(1)
+                    }
                     
-                    let aspectFace = AVMakeRect(aspectRatio: self.targetSize, insideRect: firstFace)
+                    if let randomFace = faces.randomElement() {
+        
+                        finishRect = AVMakeRect(aspectRatio: self.targetSize, insideRect: randomFace)
+                        
+                        newStack.size = x1.size
+                        
+                        print("randomface")
+                        
+                    } else {
+                        finishRect = self.randomCrop(within: aspectRect)
+                    }
                     
-                    newStack.size = x1.size
-                    newStack.zooms = self.interpolate(start: aspectRect, finish: aspectFace)
+                } else {
+                
+                    finishRect =  self.randomCrop(within: aspectRect)
+                }
+                
+                guard let finishedRect = finishRect else {
+                    
+                    //TODO handle error
+                     print("no finished rect")
+                    
+                    return
+                    
+                }
+                
+                  newStack.zooms = self.interpolate(start: aspectRect, finish: finishedRect)
+
                     
                     self.tensos.append(newStack)
                     let index = self.tensos.endIndex - 1
@@ -66,13 +101,17 @@ class TensoRepository  {
                     
                     let render = PerformCompletionHandlerOperation(on: {
                         
+                       print("PerformCompletionHandlerOperation")
                         DispatchQueue.main.sync {
                             
                             if var tenso = self.stack(for: index){
                                 
                                 tenso.stackComplete = true
                                 
+                                self.tensos.remove(at: index)
                                 completed(tenso)
+                            } else {
+                                print("no tenso")
                             }
                         }
                         
@@ -85,65 +124,8 @@ class TensoRepository  {
                         .then(do: thirdZoom)
                         .then(do: render)
                         .enqueue(on: queue)
-                    
-
-                } else {
-                    
-                    // no faces found
-                    
-                    newStack.stack.append(x1)
-                    
-                    let focusPoint : CGFloat = 20
-                
-                    
-                    let randomPoint = CGPoint(x: CGFloat.random(in: x1Rect.minX...x1Rect.maxX), y: CGFloat.random(in: x1Rect.minY...x1Rect.maxY))
-                    
-                    
-                    let randomCrop = CGRect(x: randomPoint.x - (focusPoint / 2),
-                                    y: randomPoint.y - (focusPoint / 2),
-                                    width: focusPoint,
-                                    height: focusPoint)
-                    
-                    let zooms = self.interpolate(start: x1Rect, finish: randomCrop)
-                    
-                    
-                    if let midwayZoom = Array(zooms.suffix(6)).first {
-                        
-                        self.append(x1, cropped: midwayZoom, to: &newStack, focusRect: nil)
-                        
-                    }
-                    
-                    if let penultimateZoom = Array(zooms.suffix(4)).first {
-                        
-                        self.append(x1, cropped: penultimateZoom, to: &newStack, focusRect: nil)
-                        
-                    }
-                    
-                    
-                    if let penultimateZoom = Array(zooms.suffix(2)).first {
-                        
-                        self.append(x1, cropped: penultimateZoom, to: &newStack, focusRect: nil)
-                        
-                    }
-                    
-                    newStack.stackComplete = true
-                    
-                    DispatchQueue.main.sync {
-                        completed(newStack)
-                    }
-                    
-                    
-                    
+     
                 }
-                
-                
-               
-                
-            }
-            
-            
-           
-    
         
         })
             
@@ -286,4 +268,17 @@ extension TensoRepository : TensoZoomCompletionDelegate {
             }
         
     }
+    
+    func randomCrop(within rect: CGRect) -> CGRect{
+        
+        let focusPoint : CGFloat = 20
+        
+        let randomPoint = CGPoint(x: CGFloat.random(in: rect.minX...rect.maxX), y: CGFloat.random(in: rect.minY...rect.maxY))
+        
+        return CGRect(x: randomPoint.x - (focusPoint / 2),
+                      y: randomPoint.y - (focusPoint / 2),
+                      width: focusPoint,
+                      height: focusPoint)
+    }
+        
 }

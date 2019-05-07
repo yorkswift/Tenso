@@ -10,6 +10,8 @@ extension UIViewController {
         
         //UIView.transition(with: self.view, duration: 0.5, options: [.transitionCrossDissolve], animations: {
             self.view.addSubview(child.view)
+
+        
             child.didMove(toParent: self)
         //}, completion: nil)
         
@@ -28,5 +30,7 @@ extension UIViewController {
        // }, completion: nil)
         
     }
+    
+    
     
 }

@@ -12,6 +12,8 @@ class TensoModeViewController : UITabBarController {
     var selectedPhotoIndex: Int?
     var tensoRepository : TensoRepository?
     
+    var facesTabBarItem : UITabBarItem?
+    
     var arrayOfImageNameForSelectedState = ["AutoSelected","FacesSelected"]
     var arrayOfImageNameForUnselectedState = ["AutoNormal","FacesNormal"]
     
@@ -47,6 +49,21 @@ class TensoModeViewController : UITabBarController {
             TensoRepository.shared.renderTenso(for: tenso,
                 onBegun: { img in
                     began(img)
+                },
+                onDetection: { faceCount in
+                    
+                    if let facesTabBarItem = self.facesTabBarItem {
+                        
+                        facesTabBarItem.badgeValue = String(faceCount)
+                        
+                    }
+                   
+                    
+                },
+                onProgress: { increment in
+                    
+                    //TODO update progress bar
+                    
                 },
                 onComplete:
                 { newStack in
@@ -84,7 +101,12 @@ class TensoModeViewController : UITabBarController {
                 let imageNameForUnselectedState = arrayOfImageNameForUnselectedState[i]
                 
                 self.tabBar.items?[i].selectedImage = UIImage(named: imageNameForSelectedState)?.withRenderingMode(.alwaysOriginal)
+                
                 self.tabBar.items?[i].image = UIImage(named: imageNameForUnselectedState)?.withRenderingMode(.alwaysOriginal)
+                
+                if (facesTabBarItem == nil && imageNameForUnselectedState == "FacesNormal"){
+                    facesTabBarItem = self.tabBar.items?[i]
+                }
             }
         }
         
@@ -96,8 +118,8 @@ class TensoModeViewController : UITabBarController {
            
             if let modeView = self.selectedViewController as? AutoModeViewController {
                 
-                if let tensoStackView = modeView.tensoStackView() {
-                
+                if let tensoStackView = modeView.tensoStackView {
+
                     if let image = renderImage(from:tensoStackView) {
 
                         self.messagesDelegate?.send(photo: image, onCompletion: {
@@ -105,7 +127,7 @@ class TensoModeViewController : UITabBarController {
                         })
 
                     }
-                    
+
                 }
             
             }

@@ -20,10 +20,8 @@ class FeatureRepository {
         guard let coreImagePhoto = convertToCoreImage(from : photo) else { return nil }
             
         let faces = faceDetector.features(in: coreImagePhoto)
-            
-        guard let randomFace = faces.randomElement() as? CIFaceFeature else { return nil }
                 
-        return [randomFace.bounds.applying(transform)]
+        return faces.map{ $0.bounds.applying(transform) }
 
     }
     

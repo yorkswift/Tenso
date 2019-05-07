@@ -16,6 +16,8 @@ class CreateTensoZoomOperation: ConcurrentOperation {
     
     override func execute() {
         
+        print("CreateTensoZoomOperation \(stackIndex)")
+        
         if let currentStack = TensoRepository.shared.stack(for: stackIndex) {
             
         if let zoomRect = Array(currentStack.zooms.suffix(targetLevel)).first {
@@ -29,13 +31,19 @@ class CreateTensoZoomOperation: ConcurrentOperation {
                     if let zoomImage = image {
                         
                         TensoRepository.shared.add(zoom: zoomImage, for: self.stackIndex)
-                        self.finish()
-                        //self.append(x2, cropped: nil, to: &newStack, focusRect: firstFace)
                         
-                    }
+                        self.finish()
+                        
+                    } else {
+                        
+                        //this can happen when the requested crop doesn't exist at that resolution
+                        print("failed to crop")
+                }
                 
             })
                 
+        } else {
+            print("failed to get \(targetLevel) from \(currentStack.zooms.count)")
         }
             
         } else {
