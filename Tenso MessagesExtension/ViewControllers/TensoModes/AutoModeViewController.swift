@@ -3,7 +3,6 @@ import UIKit
 
 class AutoModeViewController: UIViewController {
     
-    
     @IBOutlet weak var tensoStackView: UIStackView!
     @IBOutlet weak var loadingStackView: UIStackView!
     
@@ -22,6 +21,12 @@ class AutoModeViewController: UIViewController {
         
         super.viewDidLoad()
         
+        loadingImageView.isHidden = false
+        loadingImageView.alpha = 1
+        
+        tensoStackView.isHidden = true
+        tensoStackView.alpha = 0
+        
         beginRenderingTenso()
         
     }
@@ -34,11 +39,13 @@ class AutoModeViewController: UIViewController {
            
               onBegun: { img in
                                         
-                self.loadingImage = img
+               self.loadingImageView.image = img
                 
               },
               onComplete: { stack in
-                                        
+                
+                    print("complete")
+                
                    self.hideLoadingView(onComplete: {
                     
                         self.mapImagesToViews(with: stack)
@@ -60,7 +67,6 @@ class AutoModeViewController: UIViewController {
                 
                 self.loadingImageView.alpha = 0
                 
-                
             }, completion: {
                 success in
                 self.loadingImageView.isHidden = true
@@ -74,9 +80,7 @@ class AutoModeViewController: UIViewController {
     
     func mapImagesToViews(with stack : TensoStack){
         
-        tensoStackView.alpha = 0;
         tensoStackView.isHidden = false
-        
         var v = 0
         for subView in self.tensoStackView.subviews {
             

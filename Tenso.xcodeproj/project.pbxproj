@@ -579,14 +579,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8STYTPX2RS;
+				DEVELOPMENT_TEAM = 9UQ2LL8A29;
 				INFOPLIST_FILE = "Tenso MessagesExtension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = yorkSwift.Tenso.MessagesExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.henryallsuch.Tenso.MessagesExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
@@ -600,14 +600,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8STYTPX2RS;
+				DEVELOPMENT_TEAM = 9UQ2LL8A29;
 				INFOPLIST_FILE = "Tenso MessagesExtension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = yorkSwift.Tenso.MessagesExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.henryallsuch.Tenso.MessagesExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
@@ -622,9 +622,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8STYTPX2RS;
+				DEVELOPMENT_TEAM = 9UQ2LL8A29;
 				INFOPLIST_FILE = Tenso/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = yorkSwift.Tenso;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.henryallsuch.Tenso;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -638,9 +638,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8STYTPX2RS;
+				DEVELOPMENT_TEAM = 9UQ2LL8A29;
 				INFOPLIST_FILE = Tenso/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = yorkSwift.Tenso;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.henryallsuch.Tenso;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

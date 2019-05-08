@@ -43,20 +43,20 @@ class TensoRepository  {
             
             var newStack = stack
             
-            PhotoRepository.shared.fetchPhoto(for: newStack.asset, at: newStack.size, completion: { image in
+            PhotoRepository.shared.fetchPhoto(for: newStack.asset, at: newStack.size, completion: { possibleSourceImage in
             
-            if let x1 = image {
+            if let sourceImage = possibleSourceImage {
                 
                 DispatchQueue.main.sync {
-                    began(x1)
+                    began(sourceImage)
                 }
                 
-                let x1Rect = CGRect(origin: CGPoint.zero, size: x1.size)
-                let aspectRect = AVMakeRect(aspectRatio: self.targetSize, insideRect: x1Rect)
+                let sourceImageRect = CGRect(origin: CGPoint.zero, size: sourceImage.size)
+                let startingApectRect = AVMakeRect(aspectRatio: self.targetSize, insideRect: sourceImageRect)
             
-                var finishRect : CGRect?
+                var finalAspectRect : CGRect?
                 
-                if let faces = FeatureRepository.shared.detectFaces(in: x1) {
+                if let faces = FeatureRepository.shared.detectFaces(in: sourceImage) {
                 
                     DispatchQueue.main.sync {
                         detected(faces.count)
@@ -65,22 +65,20 @@ class TensoRepository  {
                     
                     if let randomFace = faces.randomElement() {
         
-                        finishRect = AVMakeRect(aspectRatio: self.targetSize, insideRect: randomFace)
+                        finalAspectRect = AVMakeRect(aspectRatio: self.targetSize, insideRect: randomFace)
                         
-                        newStack.size = x1.size
-                        
-                        print("randomface")
+                        newStack.size = sourceImage.size
                         
                     } else {
-                        finishRect = self.randomCrop(within: aspectRect)
+                        finalAspectRect = self.randomCrop(within: startingApectRect)
                     }
                     
                 } else {
                 
-                    finishRect =  self.randomCrop(within: aspectRect)
+                    finalAspectRect =  self.randomCrop(within: startingApectRect)
                 }
                 
-                guard let finishedRect = finishRect else {
+                guard let finalRect = finalAspectRect else {
                     
                     //TODO handle error
                      print("no finished rect")
@@ -89,7 +87,7 @@ class TensoRepository  {
                     
                 }
                 
-                  newStack.zooms = self.interpolate(start: aspectRect, finish: finishedRect)
+                newStack.zooms = self.interpolate(start: startingApectRect, finish: finalRect)
 
                     
                     self.tensos.append(newStack)
@@ -154,76 +152,6 @@ class TensoRepository  {
     
     }
     
-    func append(_ source: UIImage, cropped crop: CGRect?, to currentStack : inout TensoStack, focusRect : CGRect?){
-        
-      //  var sourceImage: UIImage
-//        if let focusedRect = focusRect  {
-//           sourceImage = drawRectangleOnImage(image: source, rectangle: focusedRect)
-//        } else {
-          //  sourceImage = source
-       // }
-        
-       
-        if let cropped = crop {
-            
-            if let cutImageRef: CGImage = source.cgImage?.cropping(to:cropped) {
-            
-                let x2: UIImage = UIImage(cgImage: cutImageRef)
-    
-                currentStack.stack.append(x2)
-            
-             }
-            
-        } else {
-             currentStack.stack.append(source)
-        }
-        
-    }
-    
-    func flatten(stack : TensoStack, onComplete completed : @escaping (_ final : UIImage) -> Void) -> Void {
-        
-        let targetWidth = stack.size.width
-        let targetHeight = stack.size.height
-        
-        DispatchQueue.global(qos: .userInitiated).async {
-            
-        let finalPhotoSize = CGRect(x: 0, y: 0, width: targetWidth, height: targetHeight * CGFloat(integerLiteral: stack.targetCount))
-            
-        let renderer = UIGraphicsImageRenderer(size: finalPhotoSize.size)
-
-        let compositeImage = renderer.image { context in
-
-            for (index,possibleImage) in stack.stack.enumerated() {
-
-                if let image = possibleImage {
-                    
-                    var scaledImageRect = CGRect.zero
-                    
-                    let aspectWidth:CGFloat = targetWidth / image.size.width
-                    let aspectHeight:CGFloat = targetHeight / image.size.height
-                    let aspectRatio:CGFloat = min(aspectWidth, aspectHeight)
-                    
-                    scaledImageRect.size.width = image.size.width * aspectRatio
-                    scaledImageRect.size.height = image.size.height * aspectRatio
-                    scaledImageRect.origin.x = 0
-                    scaledImageRect.origin.y = CGFloat(index) * targetHeight
-                    
-                    //let photoPosition = CGRect(x: 0 , y: CGFloat(index) * targetHeight, width: targetWidth, height: targetHeight)
-
-                    image.draw(in: scaledImageRect)
-                    
-                }
-
-            }
-
-        }
-
-        completed(compositeImage)
-
-        }
-        
-    }
-    
     func drawRectangleOnImage(image: UIImage, rectangle: CGRect) -> UIImage {
         
         let imageSize = image.size
@@ -250,35 +178,17 @@ class TensoRepository  {
         
     }
     
-}
-
-extension TensoRepository : TensoZoomCompletionDelegate {
-    
-    func append(zoom: UIImage, onCompletion complete: @escaping EmptyVoidClosure) {
-        
-        
-            DispatchQueue.main.sync {
-                
-                
-                //newStack.stackComplete = true
-                
-                //print(newStack.stack)
-                
-                //complete(newStack)
-            }
-        
-    }
-    
     func randomCrop(within rect: CGRect) -> CGRect{
         
-        let focusPoint : CGFloat = 20
+        let smallestCropWidth = rect.width / 3
+        let smallestCropHeight = rect.height / 3
         
         let randomPoint = CGPoint(x: CGFloat.random(in: rect.minX...rect.maxX), y: CGFloat.random(in: rect.minY...rect.maxY))
-        
-        return CGRect(x: randomPoint.x - (focusPoint / 2),
-                      y: randomPoint.y - (focusPoint / 2),
-                      width: focusPoint,
-                      height: focusPoint)
+       
+        return CGRect(x: randomPoint.x - (smallestCropWidth / 2),
+               y: randomPoint.y - (smallestCropHeight / 2),
+               width: smallestCropWidth,
+               height: smallestCropHeight)
     }
         
 }
