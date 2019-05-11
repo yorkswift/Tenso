@@ -21,8 +21,8 @@ class AutoModeViewController: UIViewController {
         
         super.viewDidLoad()
         
-        loadingImageView.isHidden = false
-        loadingImageView.alpha = 1
+        loadingStackView.isHidden = false
+        loadingStackView.alpha = 1
         
         tensoStackView.isHidden = true
         tensoStackView.alpha = 0
@@ -44,9 +44,9 @@ class AutoModeViewController: UIViewController {
               },
               onComplete: { stack in
                 
-                    print("complete")
                 
-                   self.hideLoadingView(onComplete: {
+                
+                   self.hideLoadingStackView(onComplete: {
                     
                         self.mapImagesToViews(with: stack)
                     
@@ -59,17 +59,19 @@ class AutoModeViewController: UIViewController {
     }
     
 
-    func hideLoadingView(onComplete completed: @escaping () -> Void ){
+    func hideLoadingStackView(onComplete completed: @escaping () -> Void ){
         
+       
         CATransaction.begin()
         CATransaction.setCompletionBlock({
             UIView.transition(with: self.view, duration: 0.25, options: [.transitionCrossDissolve], animations: {
                 
-                self.loadingImageView.alpha = 0
+                self.loadingStackView.alpha = 0
                 
             }, completion: {
                 success in
-                self.loadingImageView.isHidden = true
+                
+                self.loadingStackView.isHidden = true
                 completed()
             })
         })

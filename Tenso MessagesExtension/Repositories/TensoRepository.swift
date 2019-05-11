@@ -99,7 +99,7 @@ class TensoRepository  {
                     
                     let render = PerformCompletionHandlerOperation(on: {
                         
-                       print("PerformCompletionHandlerOperation")
+                       
                         DispatchQueue.main.sync {
                             
                             if var tenso = self.stack(for: index){
@@ -180,15 +180,23 @@ class TensoRepository  {
     
     func randomCrop(within rect: CGRect) -> CGRect{
         
-        let smallestCropWidth = rect.width / 3
-        let smallestCropHeight = rect.height / 3
+        let smallestCropWidth = rect.width / 5
+        let smallestCropHeight = rect.height / 5
         
-        let randomPoint = CGPoint(x: CGFloat.random(in: rect.minX...rect.maxX), y: CGFloat.random(in: rect.minY...rect.maxY))
-       
-        return CGRect(x: randomPoint.x - (smallestCropWidth / 2),
-               y: randomPoint.y - (smallestCropHeight / 2),
-               width: smallestCropWidth,
-               height: smallestCropHeight)
+        let minX = rect.minX
+        let maxX = rect.maxX - smallestCropWidth
+        let minY = rect.minY
+        let maxY = rect.maxY - smallestCropHeight
+        
+        let randomPoint = CGPoint(
+            x: CGFloat.random(in: minX...maxX),
+            y: CGFloat.random(in: minY...maxY)
+        )
+        
+        return CGRect(x: randomPoint.x,
+                      y: randomPoint.y,
+                      width: smallestCropWidth,
+                      height: smallestCropHeight)
     }
         
 }
