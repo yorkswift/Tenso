@@ -49,12 +49,8 @@ class PhotoRepository {
     }
     
     func fetchCroppedPhoto(for asset: PHAsset, at size: CGSize, cropped : CGRect, completion completed: @escaping (UIImage?)->()) {
-        
-        print(asset.pixelWidth, asset.pixelHeight)
-        
-        
-        print(cropped.height, cropped.width)
-        
+    
+    
         var zoomScalingUpXFactor : CGFloat = 1.0
         var zoomScalingUpYFactor : CGFloat = 1.0
         
@@ -70,9 +66,6 @@ class PhotoRepository {
                 width: size.width * retinaScale * zoomScalingUpXFactor,
                 height: size.height * retinaScale * zoomScalingUpYFactor
         )
-
-        print(targetSize.height, targetSize.width)
-        //print(retinaScale, size, targetSize, cropped)
         
         let cropOptions = PHImageRequestOptions()
         cropOptions.isSynchronous = true
