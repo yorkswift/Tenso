@@ -39,8 +39,9 @@ class PhotoRepository {
     
     func fetchPhoto(for asset: PHAsset, at size: CGSize, completion block: @escaping (UIImage?)->()) {
         
-        let retinaScale = UIScreen.main.scale * 0.5
+        let retinaScale = UIScreen.main.scale * 0.66
         let targetSize = CGSize(width: size.width * retinaScale, height: size.height * retinaScale)
+        
         
         imageManager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFit, options: requestOptions) { (image, _) in
             block(image)
@@ -54,11 +55,11 @@ class PhotoRepository {
         var zoomScalingUpXFactor : CGFloat = 1.0
         var zoomScalingUpYFactor : CGFloat = 1.0
         
-        if(cropped.width < 0.5 ){
+        if(cropped.width < 0.7 ){
         
-         zoomScalingUpXFactor = (1 / (1 - cropped.width)) * 2
-         zoomScalingUpYFactor = (1 / (1 - cropped.height)) * 2
-        
+         zoomScalingUpXFactor = (1 / (1 - cropped.width)) * 3
+         zoomScalingUpYFactor = (1 / (1 - cropped.height)) * 3
+            
         }
         
         let retinaScale = UIScreen.main.scale

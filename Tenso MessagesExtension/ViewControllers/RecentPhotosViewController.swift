@@ -85,9 +85,9 @@ class RecentPhotosViewController : UICollectionViewController, UICollectionViewD
         
         guard let cell = collectionView.cellForItem(at: indexPath) as? RecentPhotoCell else { return }
         
-        messagesDelegate?.recentPhotosDidSelectPhoto(onCompletion: {
+        messagesDelegate?.recentPhotosDidSelectPhoto(onCompletion: { [weak self] in
         
-            self.performSegue(withIdentifier: String(describing:Segues.ShowTensoModeController), sender: cell)
+            self?.performSegue(withIdentifier: String(describing:Segues.ShowTensoModeController), sender: cell)
         
         })
         

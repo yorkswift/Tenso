@@ -44,8 +44,6 @@ class AutoModeViewController: UIViewController {
               },
               onComplete: { stack in
                 
-                
-                
                    self.hideLoadingStackView(onComplete: {
                     
                         self.mapImagesToViews(with: stack)

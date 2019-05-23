@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ObA-dk-sSI">
-    <device id="ipad11_0rounded" orientation="landscape">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ObA-dk-sSI">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eAe-oc-qCe">
-                                <rect key="frame" x="0.0" y="24" width="320" height="484"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="450"/>
                                 <color key="backgroundColor" red="0.0" green="0.46274509800000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <segue destination="SD4-qf-INR" kind="embed" id="Q1f-1M-Cyj"/>
@@ -47,7 +47,7 @@
             <objects>
                 <collectionViewController id="klY-F0-Cye" customClass="RecentPhotosViewController" customModule="Tenso_MessagesExtension" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="5bK-Ac-5Lj">
-                        <rect key="frame" x="0.0" y="0.0" width="1194" height="834"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.10428088639051683" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="MLa-qK-Dqp">
@@ -99,11 +99,11 @@
             <objects>
                 <viewController id="Z6V-TW-xhG" userLabel="FaceTenso" customClass="FacesModeViewController" customModule="Tenso_MessagesExtension" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Dv2-4a-C8Z">
-                        <rect key="frame" x="0.0" y="0.0" width="1194" height="834"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coming soon..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sjU-YT-ics">
-                                <rect key="frame" x="539.5" y="386" width="115" height="21"/>
+                                <rect key="frame" x="130" y="376" width="115" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -127,40 +127,41 @@
             <objects>
                 <viewController storyboardIdentifier="DetectionViewController" id="QJT-rO-V9U" customClass="DetectionViewController" customModule="Tenso_MessagesExtension" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cW1-zv-yQX">
-                        <rect key="frame" x="0.0" y="0.0" width="1194" height="834"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="v2K-mh-vLK" userLabel="LoadingStackView">
-                                <rect key="frame" x="350.5" y="64" width="493" height="715"/>
+                                <rect key="frame" x="30" y="74" width="315" height="659"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" image="FacesSelected" translatesAutoresizingMaskIntoConstraints="NO" id="p23-aw-lMh">
-                                        <rect key="frame" x="0.0" y="0.0" width="493" height="674.5"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="p23-aw-lMh">
+                                        <rect key="frame" x="0.0" y="0.0" width="315" height="217.33333333333334"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="p23-aw-lMh" secondAttribute="height" multiplier="435:300" id="qgs-Cq-cH7"/>
+                                        </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detecting Features" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Apk-Mg-e3x">
-                                        <rect key="frame" x="0.0" y="674.5" width="493" height="18"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1" verticalHuggingPriority="1" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" text="Detecting Features" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Apk-Mg-e3x">
+                                        <rect key="frame" x="0.0" y="217.33333333333334" width="315" height="419.33333333333326"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                         <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="Shim" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y0P-I2-JmI">
-                                        <rect key="frame" x="0.0" y="692.5" width="493" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="636.66666666666663" width="315" height="20.333333333333371"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="FdF-1D-iuD">
-                                        <rect key="frame" x="0.0" y="713" width="493" height="2"/>
+                                        <rect key="frame" x="0.0" y="657" width="315" height="2"/>
                                     </progressView>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="v2K-mh-vLK" secondAttribute="height" multiplier="300:435" id="J5t-1e-bqo"/>
-                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="0.10000000000000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="v2K-mh-vLK" firstAttribute="centerX" secondItem="cW1-zv-yQX" secondAttribute="centerX" id="A1a-L7-cqa"/>
-                            <constraint firstItem="v2K-mh-vLK" firstAttribute="top" secondItem="cW1-zv-yQX" secondAttribute="top" constant="64" id="HGZ-Oj-QUL"/>
+                            <constraint firstItem="v2K-mh-vLK" firstAttribute="top" secondItem="0fS-M4-opW" secondAttribute="top" constant="30" id="HGZ-Oj-QUL"/>
+                            <constraint firstItem="v2K-mh-vLK" firstAttribute="width" secondItem="0fS-M4-opW" secondAttribute="width" constant="-60" id="fWR-wB-8XO"/>
                             <constraint firstItem="v2K-mh-vLK" firstAttribute="height" secondItem="0fS-M4-opW" secondAttribute="height" constant="-75" id="h67-cl-tNv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0fS-M4-opW"/>
@@ -180,46 +181,46 @@
             <objects>
                 <viewController id="RXp-TD-UK3" userLabel="AutoTenso" customClass="AutoModeViewController" customModule="Tenso_MessagesExtension" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SI4-w9-TI0">
-                        <rect key="frame" x="0.0" y="0.0" width="1194" height="834"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8yh-GQ-0Nx" userLabel="LoadingStackView">
-                                <rect key="frame" x="364" y="54" width="466" height="675"/>
+                                <rect key="frame" x="-24.666666666666657" y="74" width="424.33333333333326" height="615"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" image="FacesSelected" translatesAutoresizingMaskIntoConstraints="NO" id="hG9-sH-tTn">
-                                        <rect key="frame" x="0.0" y="0.0" width="466" height="634.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="424.33333333333331" height="574.66666666666663"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detecting Features" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="deV-Tk-e3c">
-                                        <rect key="frame" x="0.0" y="634.5" width="466" height="18"/>
+                                        <rect key="frame" x="0.0" y="574.66666666666663" width="424.33333333333331" height="18"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                         <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="Shim" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OL5-9L-wCG">
-                                        <rect key="frame" x="0.0" y="652.5" width="466" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="592.66666666666663" width="424.33333333333331" height="20.333333333333371"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.10000000149011612" translatesAutoresizingMaskIntoConstraints="NO" id="62Y-4R-pzV">
-                                        <rect key="frame" x="0.0" y="673" width="466" height="2"/>
+                                        <rect key="frame" x="0.0" y="613" width="424.33333333333331" height="2"/>
                                     </progressView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="8yh-GQ-0Nx" secondAttribute="height" multiplier="300:435" id="DRA-MA-kTJ"/>
                                 </constraints>
                             </stackView>
-                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="SoI-re-aJE" userLabel="TensoStackView">
-                                <rect key="frame" x="364" y="54" width="466" height="675"/>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="SoI-re-aJE" userLabel="TensoStackView">
+                                <rect key="frame" x="-24.666666666666657" y="74" width="424.33333333333326" height="615"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2K3-me-Qme" userLabel="x1">
-                                        <rect key="frame" x="0.5" y="0.0" width="465.5" height="225"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2K3-me-Qme" userLabel="x1">
+                                        <rect key="frame" x="0.0" y="0.0" width="424.33333333333331" height="205"/>
                                     </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4qg-Cq-Rc3" userLabel="x2">
-                                        <rect key="frame" x="0.5" y="225" width="465.5" height="225"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4qg-Cq-Rc3" userLabel="x2">
+                                        <rect key="frame" x="0.0" y="205" width="424.33333333333331" height="205"/>
                                     </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j6x-Oq-MxI" userLabel="x3">
-                                        <rect key="frame" x="0.5" y="450" width="465.5" height="225"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j6x-Oq-MxI" userLabel="x3">
+                                        <rect key="frame" x="0.0" y="410" width="424.33333333333331" height="205"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.15686274510000001" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -256,7 +257,7 @@
             <objects>
                 <viewController storyboardIdentifier="DefaultTensoViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="currentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Gg3-w9-wVv" customClass="TensoViewController" customModule="Tenso_MessagesExtension" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MP8-Lg-AEE">
-                        <rect key="frame" x="0.0" y="0.0" width="1194" height="834"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.10000000000000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="jXo-uR-yR2"/>
@@ -295,7 +296,7 @@
             <objects>
                 <navigationController modalTransitionStyle="crossDissolve" id="SD4-qf-INR" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="A0G-AE-FZj">
-                        <rect key="frame" x="0.0" y="24" width="320" height="50"/>
+                        <rect key="frame" x="0.0" y="44" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>

@@ -63,9 +63,38 @@ class TensoRepository  {
                         progress(1)
                     }
                     
-                    if let randomFace = faces.randomElement() {
-        
-                        finalAspectRect = AVMakeRect(aspectRatio: self.targetSize, insideRect: randomFace)
+                    if let detectedRandomFace = faces.randomElement() {
+                        
+                       let randomFace = detectedRandomFace.insetBy(dx: -2, dy: -2)
+                        
+                        let aspectFace = AVMakeRect(aspectRatio: self.targetSize, insideRect: randomFace)
+                        
+                        var h : CGFloat = 0
+                        var w : CGFloat = 0
+                        var x : CGFloat = 0
+                        var y : CGFloat = 0
+                        
+                        if(aspectFace.height == randomFace.height){
+                            
+                            h = randomFace.width
+                            w = aspectFace.height * (aspectFace.height / aspectFace.width)
+                            y = randomFace.minY - ((h - randomFace.height) / 2)
+                            x = randomFace.minX
+                            
+                        } else if(aspectFace.width == randomFace.width){
+                            
+                            h = randomFace.height
+                            w = aspectFace.width * (aspectFace.width / aspectFace.height)
+                            x = randomFace.minX - ((w - randomFace.width) / 2)
+                                
+                            y = randomFace.minY
+                        }
+                        
+                        finalAspectRect = CGRect(origin:
+                            CGPoint(x: x,y: y),size:
+                            CGSize(width: w, height: h))
+                            
+                            //.offsetBy(dx: 0, dy: -5).insetBy(dx: 1, dy: 1)
                         
                         newStack.size = sourceImage.size
                         
