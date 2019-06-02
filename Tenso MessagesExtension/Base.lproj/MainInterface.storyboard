@@ -214,13 +214,13 @@
                                 <rect key="frame" x="-24.666666666666657" y="74" width="424.33333333333326" height="615"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2K3-me-Qme" userLabel="x1">
-                                        <rect key="frame" x="0.0" y="0.0" width="424.33333333333331" height="205"/>
+                                        <rect key="frame" x="140.33333333333334" y="0.0" width="144.00000000000003" height="205"/>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4qg-Cq-Rc3" userLabel="x2">
-                                        <rect key="frame" x="0.0" y="205" width="424.33333333333331" height="205"/>
+                                        <rect key="frame" x="140.33333333333334" y="205" width="144.00000000000003" height="205"/>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j6x-Oq-MxI" userLabel="x3">
-                                        <rect key="frame" x="0.0" y="410" width="424.33333333333331" height="205"/>
+                                        <rect key="frame" x="140.33333333333334" y="410" width="144.00000000000003" height="205"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.15686274510000001" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -269,7 +269,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zXp-ba-uZZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3348" y="-532"/>
+            <point key="canvasLocation" x="3655" y="-532"/>
         </scene>
         <!--Tenso Mode View Controller-->
         <scene sceneID="tVh-nC-lOb">

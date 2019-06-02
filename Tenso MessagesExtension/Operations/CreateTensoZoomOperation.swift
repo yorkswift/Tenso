@@ -9,16 +9,21 @@ class CreateTensoZoomOperation: ConcurrentOperation {
     let stackIndex : Int
     let targetSize = CGSize(width: 300, height: 145)
     
+    weak var tensos : TensoRepository?
+    weak var photos : PhotoRepository?
+    
     init(at level: Int, for index : Int) {
         
         targetLevel = level
         stackIndex = index
+        tensos = TensoRepository.shared
+        photos = PhotoRepository.shared
     
     }
     
     override func execute() {
         
-        if let currentStack = TensoRepository.shared.stack(for: stackIndex) {
+        if let currentStack = tensos?.stack(for: stackIndex) {
             
         if let zoomRect = Array(currentStack.zooms.suffix(targetLevel)).first {
             
@@ -30,13 +35,17 @@ class CreateTensoZoomOperation: ConcurrentOperation {
                 )
             )
             
-            PhotoRepository.shared.fetchCroppedPhoto(for: currentStack.asset, at: targetSize, cropped: cropRectNormalised, completion: { image in
+            photos?.fetchCroppedPhoto(for: currentStack.asset, at: targetSize, cropped: cropRectNormalised, completion: { [weak self] image in
                 
                     if let zoomImage = image {
                         
-                        TensoRepository.shared.add(zoom: zoomImage, for: self.stackIndex)
+                        if let currentOperation = self {
                         
-                        self.finish()
+                            currentOperation.tensos?.add(zoom: zoomImage, for: currentOperation.stackIndex)
+                        
+                            currentOperation.finish()
+                            
+                        }
                         
                     } else {
                         

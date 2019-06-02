@@ -35,21 +35,22 @@ class AutoModeViewController: UIViewController {
         
         if let modeController = self.tabBarController as? TensoModeViewController {
             
+            
             modeController.renderTenso(for: .Auto,
-           
-              onBegun: { img in
-                                        
-               self.loadingImageView.image = img
-                
+
+              onBegun: { [weak self] img in
+
+                self?.loadingImageView.image = img
+
               },
-              onComplete: { stack in
-                
-                   self.hideLoadingStackView(onComplete: {
-                    
-                        self.mapImagesToViews(with: stack)
-                    
+              onComplete: { [weak self] stack in
+
+                   self?.hideLoadingStackView(onComplete: {
+
+                        self?.mapImagesToViews(with: stack)
+
                     })
-                
+
             })
             
         }
