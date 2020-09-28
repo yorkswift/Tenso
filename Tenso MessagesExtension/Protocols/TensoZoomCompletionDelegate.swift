@@ -1,6 +1,7 @@
 
 import Foundation
 import Photos
+import UIKit
 
 protocol TensoZoomCompletionDelegate: class {
     

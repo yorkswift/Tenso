@@ -89,7 +89,7 @@ class PhotoRepository {
         
             handleCompletion(status)
             
-        case .restricted, .denied:
+        case .restricted, .denied, .limited:
             
             handleCompletion(status)
             
@@ -106,9 +106,12 @@ class PhotoRepository {
                 case .notDetermined:
                     print("notDetermined")
                 break
+                case.limited:
+                    print("limited")
                 }
             }
         }
+        
     }
     
     func saveToLibrary(photo : UIImage){

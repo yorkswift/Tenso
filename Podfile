@@ -14,7 +14,7 @@ target 'Tenso MessagesExtension' do
   use_frameworks!
 
   # Pods for Tenso MessagesExtension
-  pod 'PeakOperation', '~> 3.1.0'
+  pod 'PeakOperation', '~> 4.3.0'
 
 end
 
